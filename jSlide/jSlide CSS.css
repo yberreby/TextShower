@@ -12,15 +12,5 @@
 	-o-transition: max-height 0.8s ease, margin 0.3s linear;
 	-ms-transition: max-height 0.8s ease, margin 0.3s linear;
 	transition: max-height 0.8s ease, margin 0.3s linear;
-	background-color: red;
 	max-height: 500px;
-}
-
-.jSlide-deployed {
-	max-height: 500px;
-}
-
-.jSlide-undeployed {
-	max-height: 0px;
-	margin: 0 0 0 0;
 }
