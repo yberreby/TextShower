@@ -94,3 +94,5 @@ for (var i = boxes.length - 1; i >= 0; i--) {
 	jSlide(boxes[i]);
 };
 }
+
+TextShower('0.8s', '0.3s', 'ease', 'linear');
