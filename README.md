@@ -7,4 +7,4 @@ tons of useless code for just a text slider ? TextShower is made for you !
 How to use
 ======
 
-Download the script and embed it (NOT FINISHED)
+Download the script and embed it in your page. Then go to your FTP and customise values by changing arguments
