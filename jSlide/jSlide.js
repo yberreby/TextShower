@@ -30,6 +30,13 @@ overflow: hidden;\
 -o-transition: max-height 0.8s ease, margin 0.3s linear;\
 -ms-transition: max-height 0.8s ease, margin 0.3s linear;\
 transition: max-height 0.8s ease, margin 0.3s linear;\
+}\
+.notransition {\
+-webkit-transition: none !important;\
+-moz-transition: none !important;\
+-o-transition: none !important;\
+-ms-transition: none !important;\
+transition: none !important;\
 }';
 document.getElementsByTagName('head')[0].appendChild(style);
 
@@ -42,11 +49,16 @@ function jSlide(box) {
 
 	titleElement.textContent = titleElement.textContent.splice(0, 0, "+ ");
 
+	textElement.className += ' notransition'; 
+
 	var prevHeight = getComputedStyle(textElement).height;
 	var prevMargin = getComputedStyle(textElement).margin;
 	textElement.style.maxHeight = '0px';
 	textElement.style.margin = '0 0 0 0';
 	titleElement.style.cursor = 'pointer';
+
+	textElement.offsetHeight;
+	textElement.className = textElement.className.replace(' notransition', '');
 
 	var deployed = false;
 
