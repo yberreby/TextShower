@@ -1,11 +1,11 @@
-function TextShower(heightDelay, marPadDelay, heightTiming, marPadTiming, doTransitions, modifyTitle) {
+function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, doTransitions, modifyTitle) {
 
 // Init
 
 heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
-marPadDelay = typeof marPadDelay !== 'undefined' ? marPadDelay : '0.3s';
+marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
 heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
-marPadTiming = typeof marPadTiming !== 'undefined' ? marPadTiming : 'linear';
+marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
 doTransitions = typeof doTransitions !== 'undefined' ? doTransitions : false;
 modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
@@ -34,11 +34,11 @@ user-select:none;\
 } \
 .TextShower-text {\
 overflow: hidden;\
--webkit-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
--moz-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
--o-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
--ms-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
+-webkit-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +', padding-top '+ marginDelay +' '+ marginTiming +', padding-bottom '+ heightDelay +' '+ heightTiming +';\
+-moz-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +', padding-top '+ marginDelay +' '+ marginTiming +', padding-bottom '+ heightDelay +' '+ heightTiming +';\
+-o-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +', padding-top '+ marginDelay +' '+ marginTiming +', padding-bottom '+ heightDelay +' '+ heightTiming +';\
+-ms-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +', padding-top '+ marginDelay +' '+ marginTiming +', padding-bottom '+ heightDelay +' '+ heightTiming +';\
+transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +', padding-top '+ marginDelay +' '+ marginTiming +', padding-bottom '+ heightDelay +' '+ heightTiming +';\
 }\
 .notransition {\
 -webkit-transition: none !important;\
@@ -47,8 +47,6 @@ transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +
 -ms-transition: none !important;\
 transition: none !important;\
 }';
-/* The margin of the textbox will be animated. If you don't want it to be, simple delete the ", margin '+ marPadDelay +' '+ marPadTiming +'" 
-section of the CSS and any piece of Javascript which contains "margin". */
 document.getElementsByTagName('head')[0].appendChild(style);
 
 
