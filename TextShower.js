@@ -20,7 +20,7 @@ function addEvent(element, event, func) {
     }
 };
 
-// Add transitions to the page
+// Add transitions rules to the page
 var style = document.createElement('style');
 style.type = 'text/css';
 style.innerHTML = '.TextShower-title {\
@@ -44,10 +44,12 @@ transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDel
 -ms-transition: none !important;\
 transition: none !important;\
 }';
+/* The margin of the textbox will be animated. If you don't want it to be, simple delete the ", margin '+ marginDelay +' '+ marginTiming +'" 
+section of the CSS and any piece of Javascript which contains "margin". */
 document.getElementsByTagName('head')[0].appendChild(style);
 
 
-// Processing
+// Activate TextShower
 
 function PrepareBox(box) {
 	var titleElement = box.getElementsByClassName('TextShower-title')[0],
@@ -95,4 +97,5 @@ for (var i = boxes.length - 1; i >= 0; i--) {
 };
 }
 
+// Edit the arguments of this function to customize the script behavior
 TextShower('0.8s', '0.3s', 'ease', 'linear');
