@@ -57,7 +57,7 @@ function PrepareBox(box) {
 
 	titleElement.textContent = titleElement.textContent.splice(0, 0, "+ ");
 
-	textElement.className += ' notransition'; 
+	// textElement.className += ' notransition'; // Temporarily disable transitions
 
 	var prevHeight = getComputedStyle(textElement).height;
 	var prevMargin = getComputedStyle(textElement).margin;
@@ -66,7 +66,7 @@ function PrepareBox(box) {
 	titleElement.style.cursor = 'pointer';
 
 	textElement.offsetHeight;
-	textElement.className = textElement.className.replace(' notransition', '');
+	// textElement.className = textElement.className.replace(' notransition', ''); // Reactivate transitions
 
 	var deployed = false;
 
