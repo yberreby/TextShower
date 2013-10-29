@@ -39,6 +39,7 @@ overflow: hidden;\
 -o-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
 -ms-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
 transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
+max-height: 0;\
 }\
 .notransition {\
 -webkit-transition: none !important;\
@@ -66,7 +67,7 @@ function PrepareBox(box) {
 	var prevMargin = getComputedStyle(textElement).margin;
 	var prevPaddingTop = getComputedStyle(textElement).paddingTop;
 	var prevPaddingBottom = getComputedStyle(textElement).paddingBottom;
-	textElement.style.maxHeight = '0px';
+	//textElement.style.maxHeight = '0px';
 	textElement.style.margin = '0 0 0 0';
 	textElement.style.paddingTop = '0';
 	textElement.style.paddingBottom = '0';
