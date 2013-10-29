@@ -1,11 +1,11 @@
-function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, doTransitions, modifyTitle) {
+function TextShower(heightDelay, marPadDelay, heightTiming, marPadTiming, doTransitions, modifyTitle) {
 
 // Init
 
 heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
-marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
+marPadDelay = typeof marPadDelay !== 'undefined' ? marPadDelay : '0.3s';
 heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
-marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
+marPadTiming = typeof marPadTiming !== 'undefined' ? marPadTiming : 'linear';
 doTransitions = typeof doTransitions !== 'undefined' ? doTransitions : false;
 modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
@@ -34,11 +34,11 @@ user-select:none;\
 } \
 .TextShower-text {\
 overflow: hidden;\
--webkit-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
--moz-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
--o-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
--ms-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
+-webkit-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
+-moz-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
+-o-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
+-ms-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
+transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
 }\
 .notransition {\
 -webkit-transition: none !important;\
@@ -47,7 +47,7 @@ transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDel
 -ms-transition: none !important;\
 transition: none !important;\
 }';
-/* The margin of the textbox will be animated. If you don't want it to be, simple delete the ", margin '+ marginDelay +' '+ marginTiming +'" 
+/* The margin of the textbox will be animated. If you don't want it to be, simple delete the ", margin '+ marPadDelay +' '+ marPadTiming +'" 
 section of the CSS and any piece of Javascript which contains "margin". */
 document.getElementsByTagName('head')[0].appendChild(style);
 
@@ -64,8 +64,12 @@ function PrepareBox(box) {
 
 	var prevHeight = getComputedStyle(textElement).height;
 	var prevMargin = getComputedStyle(textElement).margin;
+	var prevPaddingTop = getComputedStyle(textElement).paddingTop;
+	var prevPaddingBottom = getComputedStyle(textElement).paddingBottom;
 	textElement.style.maxHeight = '0px';
 	textElement.style.margin = '0 0 0 0';
+	textElement.style.paddingTop = '0';
+	textElement.style.paddingBottom = '0';
 	titleElement.style.cursor = 'pointer';
 
 	textElement.offsetHeight;
@@ -80,6 +84,8 @@ function PrepareBox(box) {
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
 			textElement.style.maxHeight = prevHeight;
 			textElement.style.margin = prevMargin;
+			textElement.style.paddingTop = prevPaddingTop;
+			textElement.style.paddingBottom = prevPaddingBottom;
 		}
 
 		else {
@@ -88,7 +94,9 @@ function PrepareBox(box) {
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
 			textElement.style.maxHeight = '0px';
 			textElement.style.margin = '0 0 0 0';
-	}
+			textElement.style.paddingTop = '0';
+			textElement.style.paddingBottom = '0';
+		}
 })
 }
 
