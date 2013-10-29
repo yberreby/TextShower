@@ -23,13 +23,13 @@ function addEvent(element, event, func) {
 // Add transitions to the page
 var style = document.createElement('style');
 style.type = 'text/css';
-style.innerHTML = '.jSlide-title {\
+style.innerHTML = '.TextShower-title {\
 -moz-user-select: none;\
 -webkit-user-select: none;\
 -ms-user-select:none;\
 user-select:none;\
 } \
-.jSlide-text {\
+.TextShower-text {\
 overflow: hidden;\
 -webkit-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
 -moz-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
@@ -49,9 +49,9 @@ document.getElementsByTagName('head')[0].appendChild(style);
 
 // Processing
 
-function jSlide(box) {
-	var titleElement = box.getElementsByClassName('jSlide-title')[0],
-	textElement = box.getElementsByClassName('jSlide-text')[0];
+function PrepareBox(box) {
+	var titleElement = box.getElementsByClassName('TextShower-title')[0],
+	textElement = box.getElementsByClassName('TextShower-text')[0];
 
 	titleElement.textContent = titleElement.textContent.splice(0, 0, "+ ");
 
@@ -88,10 +88,10 @@ function jSlide(box) {
 })
 }
 
-var boxes = document.getElementsByClassName('jSlide-box');
+var boxes = document.getElementsByClassName('TextShower-box');
 
 for (var i = boxes.length - 1; i >= 0; i--) {
-	jSlide(boxes[i]);
+	PrepareBox(boxes[i]);
 };
 }
 
