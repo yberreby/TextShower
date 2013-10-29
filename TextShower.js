@@ -1,5 +1,9 @@
-(function() {
+function TextShower(heightDelay, marginDelay, heightTiming, marginTiming) {
+
+heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
+marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
 heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
+marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
 
 // Useful stuff, init of the script
 
@@ -16,6 +20,7 @@ function addEvent(element, event, func) {
     }
 };
 
+// Add transitions to the page
 var style = document.createElement('style');
 style.type = 'text/css';
 style.innerHTML = '.jSlide-title {\
@@ -26,10 +31,11 @@ user-select:none;\
 } \
 .jSlide-text {\
 overflow: hidden;\
--moz-transition: max-height 0.8s ease, margin 0.3s linear;\
--o-transition: max-height 0.8s ease, margin 0.3s linear;\
--ms-transition: max-height 0.8s ease, margin 0.3s linear;\
-transition: max-height 0.8s ease, margin 0.3s linear;\
+-webkit-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
+-moz-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
+-o-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
+-ms-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
+transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marginDelay +' '+ marginTiming +';\
 }\
 .notransition {\
 -webkit-transition: none !important;\
@@ -41,7 +47,7 @@ transition: none !important;\
 document.getElementsByTagName('head')[0].appendChild(style);
 
 
-// Beginning of the real script
+// Processing
 
 function jSlide(box) {
 	var titleElement = box.getElementsByClassName('jSlide-title')[0],
@@ -87,6 +93,6 @@ var boxes = document.getElementsByClassName('jSlide-box');
 for (var i = boxes.length - 1; i >= 0; i--) {
 	jSlide(boxes[i]);
 };
-}) ();
+}
 
 
