@@ -34,12 +34,11 @@ user-select:none;\
 } \
 .TextShower-text {\
 overflow: hidden;\
--webkit-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
--moz-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
--o-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
--ms-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
-transition: max-height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ marPadDelay +' '+ marPadTiming +';\
-max-height: 0;\
+-webkit-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
+-moz-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
+-o-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
+-ms-transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
+transition: height '+ heightDelay +' '+ heightTiming +', margin '+ marPadDelay +' '+ marPadTiming +', padding-top '+ marPadDelay +' '+ marPadTiming +', padding-bottom '+ heightDelay +' '+ marPadTiming +';\
 }\
 .notransition {\
 -webkit-transition: none !important;\
@@ -67,7 +66,7 @@ function PrepareBox(box) {
 	var prevMargin = getComputedStyle(textElement).margin;
 	var prevPaddingTop = getComputedStyle(textElement).paddingTop;
 	var prevPaddingBottom = getComputedStyle(textElement).paddingBottom;
-	//textElement.style.maxHeight = '0px';
+	textElement.style.height = '0px';
 	textElement.style.margin = '0 0 0 0';
 	textElement.style.paddingTop = '0';
 	textElement.style.paddingBottom = '0';
@@ -83,7 +82,7 @@ function PrepareBox(box) {
 			deployed = true;
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
-			textElement.style.maxHeight = prevHeight;
+			textElement.style.height = prevHeight;
 			textElement.style.margin = prevMargin;
 			textElement.style.paddingTop = prevPaddingTop;
 			textElement.style.paddingBottom = prevPaddingBottom;
@@ -93,7 +92,7 @@ function PrepareBox(box) {
 			deployed = false;
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
-			textElement.style.maxHeight = '0px';
+			textElement.style.height = '0px';
 			textElement.style.margin = '0 0 0 0';
 			textElement.style.paddingTop = '0';
 			textElement.style.paddingBottom = '0';
