@@ -14,9 +14,9 @@ function. Default values are respectively 0.8s, 0.3s, ease and linear.
 
 After that, insert this piece of code anywhere in your page : 
 
-	<div class="jSlide-box"> 
-		<strong class="jSlide-title">Headlines of the text</strong> 
-		<p class="jSlide-text">Text you want to be showed after click</p>
+	<div class="TextShower-box"> 
+		<strong class="TextShower-title">Headlines of the text</strong> 
+		<p class="TextShower-text">Text you want to be showed after click</p>
 	</div>
 
 Note that you can use any HTML tag for any element, but these are the most suitable.
