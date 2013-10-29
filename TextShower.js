@@ -1,11 +1,11 @@
 function TextShower(heightDelay, marginDelay, heightTiming, marginTiming) {
 
+// Init
+
 heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
 heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
 marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
-
-// Useful stuff, init of the script
 
 String.prototype.splice = function( idx, rem, s ) {
     return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
@@ -94,5 +94,3 @@ for (var i = boxes.length - 1; i >= 0; i--) {
 	jSlide(boxes[i]);
 };
 }
-
-
