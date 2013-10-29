@@ -1,4 +1,5 @@
 (function() {
+heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
 
 // Useful stuff, init of the script
 
@@ -25,7 +26,6 @@ user-select:none;\
 } \
 .jSlide-text {\
 overflow: hidden;\
--webkit-transition: max-height 0.8s ease, margin 0.3s linear;\
 -moz-transition: max-height 0.8s ease, margin 0.3s linear;\
 -o-transition: max-height 0.8s ease, margin 0.3s linear;\
 -ms-transition: max-height 0.8s ease, margin 0.3s linear;\
