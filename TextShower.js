@@ -10,13 +10,13 @@ modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
 if (typeof document.querySelector('meta[data-TextShower]') !== 'undefined') {
 	var settings = document.querySelector('meta[data-TextShower]').getAttribute('data-TextShower');
-	var settingsArray = settings.split(', ');
+	var settingsArray = settings.split(' ');
 
-	heightDelay = typeof settingsArray[0] !== 'undefined' && settingsArray[0] !== '' ? settingsArray[0] : heightDelay;
-	marginDelay = typeof settingsArray[1] !== 'undefined' && settingsArray[1] !== '' ? settingsArray[1] : marginDelay;
-	heightTiming = typeof settingsArray[2] !== 'undefined' && settingsArray[2] !== '' ? settingsArray[2] : heightTiming;
-	marginTiming = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== '' ? settingsArray[3] : marginTiming;
-	modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== '' ? (settingsArray[4] == 'true') : modifyTitle;
+	heightDelay = typeof settingsArray[0] !== 'undefined' && settingsArray[0] !== 'none' ? settingsArray[0] : heightDelay;
+	marginDelay = typeof settingsArray[1] !== 'undefined' && settingsArray[1] !== 'none' ? settingsArray[1] : marginDelay;
+	heightTiming = typeof settingsArray[2] !== 'undefined' && settingsArray[2] !== 'none' ? settingsArray[2] : heightTiming;
+	marginTiming = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== 'none' ? settingsArray[3] : marginTiming;
+	modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== 'none' ? (settingsArray[4] == 'true') : modifyTitle;
 }
 
 
@@ -127,4 +127,4 @@ for (var i = boxes.length - 1; i >= 0; i--) {
 }
 
 // Edit the arguments of this function to customize the script behavior
-TextShower('0.8s', '0.3s', 'ease', 'linear', false);
+TextShower('0.8s', '0.3s', 'ease', 'linear', true);
