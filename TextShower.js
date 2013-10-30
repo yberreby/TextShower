@@ -1,4 +1,4 @@
-function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, doTransitions, modifyTitle) {
+function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modifyTitle) {
 
 // Init
 
@@ -6,7 +6,6 @@ heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
 heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
 marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
-doTransitions = typeof doTransitions !== 'undefined' ? doTransitions : false;
 modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
 
@@ -58,7 +57,7 @@ function PrepareBox(box) {
 
 	if (modifyTitle) { titleElement.textContent = titleElement.textContent.splice(0, 0, "+ "); };
 
-	if (!doTransitions) { textElement.className += ' notransition'; }; // Temporarily disable transitions
+	textElement.className += ' notransition';
 
 	var prevHeight = getComputedStyle(textElement).height;
 	var prevMargin = getComputedStyle(textElement).margin;
@@ -71,7 +70,7 @@ function PrepareBox(box) {
 	titleElement.style.cursor = 'pointer';
 
 	textElement.offsetHeight;
-	if (!doTransitions) { textElement.className = textElement.className.replace(' notransition', ''); }; // Reactivate transitions
+	textElement.className = textElement.className.replace(' notransition', '');
 
 	var deployed = false;
 
