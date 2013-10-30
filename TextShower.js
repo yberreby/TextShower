@@ -8,6 +8,17 @@ heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
 marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
 modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
+if (typeof document.querySelector('meta[data-TextShower]') !== 'undefined') {
+	var settings = document.querySelector('meta[data-TextShower]').getAttribute('data-TextShower');
+	var settingsArray = settings.split(', ');
+
+	heightDelay = typeof settingsArray[0] !== 'undefined' && settingsArray[0] !== '' ? settingsArray[0] : heightDelay;
+	marginDelay = typeof settingsArray[1] !== 'undefined' && settingsArray[1] !== '' ? settingsArray[1] : marginDelay;
+	heightTiming = typeof settingsArray[2] !== 'undefined' && settingsArray[2] !== '' ? settingsArray[2] : heightTiming;
+	marginTiming = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== '' ? settingsArray[3] : marginTiming;
+	modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== '' ? settingsArray[4] : modifyTitle;
+}
+
 
 String.prototype.splice = function( idx, rem, s ) {
     return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
@@ -20,6 +31,17 @@ function addEvent(element, event, func) {
     else {
         element.attachEvent('on' + event, func);
     }
+};
+
+document.getElementsByAttribute = Element.prototype.getElementsByAttribute = function(attr) {
+    var nodeList = this.getElementsByTagName('*');
+    var nodeArray = [];
+
+    for (var i = 0, elem; elem = nodeList[i]; i++) {
+        if ( elem.getAttribute(attr) ) nodeArray.push(elem);
+    }
+
+    return nodeArray;
 };
 
 // Add transitions rules to the page
@@ -105,4 +127,4 @@ for (var i = boxes.length - 1; i >= 0; i--) {
 }
 
 // Edit the arguments of this function to customize the script behavior
-TextShower('0.8s', '0.3s', 'ease', 'linear', false, true);
+TextShower('0.8s', '0.3s', 'ease', 'linear', false);
