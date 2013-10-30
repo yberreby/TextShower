@@ -16,7 +16,7 @@ if (typeof document.querySelector('meta[data-TextShower]') !== 'undefined') {
 	marginDelay = typeof settingsArray[1] !== 'undefined' && settingsArray[1] !== '' ? settingsArray[1] : marginDelay;
 	heightTiming = typeof settingsArray[2] !== 'undefined' && settingsArray[2] !== '' ? settingsArray[2] : heightTiming;
 	marginTiming = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== '' ? settingsArray[3] : marginTiming;
-	modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== '' ? settingsArray[4] : modifyTitle;
+	modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== '' ? (settingsArray[4] == 'true') : modifyTitle;
 }
 
 
@@ -100,7 +100,7 @@ function PrepareBox(box) {
 		if (!deployed) {
 			deployed = true;
 
-			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
+			if (modifyTitle == true) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
 			textElement.style.height = prevHeight;
 			textElement.style.margin = prevMargin;
 			textElement.style.paddingTop = prevPaddingTop;
@@ -110,7 +110,7 @@ function PrepareBox(box) {
 		else {
 			deployed = false;
 
-			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
+			if (modifyTitle == true) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
 			textElement.style.height = '0px';
 			textElement.style.margin = '0 0 0 0';
 			textElement.style.paddingTop = '0';
