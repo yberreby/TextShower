@@ -26,3 +26,8 @@ After that, insert this piece of code anywhere in your page :
 Note that you can use any HTML tag for any element, but these are the most suitable.
 You can embed as many TextShower boxes as you want in your page. You can also add as many classes as you want
 to the elements.
+
+Suggestions
+======
+
+You can send any suggestion at yohaiberreby@gmail.com.
