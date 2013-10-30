@@ -4,7 +4,7 @@ Presentation
 Tired of the heavy jQuery scripts for everything ? Don't want to overload your server and the client with
 tons of useless code for just a text slider ? TextShower is made for you !
 
-<a href="http://filsmick.github.io/TextShower/">Example and webpage</a>
+<a href="http://filsmick.github.io/TextShower/">Presentation, instructions and examples</a>
 
 How to use
 ======
