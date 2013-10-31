@@ -9,12 +9,7 @@ tons of useless code for just a text slider ? TextShower is made for you !
 How to use
 ======
 
-Download the script and embed it **at the end** of your page. Then go to your FTP and customise values by changing the
-arguments of the function at the end of the code. First is text transition duration, second is margin transition
-duration, third is text transition timing function, fourth is margin transition timing function, and fifth is a boolean that means "should we add a dynamic '+' sign to the box title".
-Default values are respectively 0.8s, 0.3s, ease, linear, and true.
-
-After that, insert this piece of code anywhere in your page : 
+You can simply start by uploading TextShower.js or TextShower.min.js to your FTP server, then inserting this piece of code anywhere in your page : 
 
 ``` html
 <div class="TextShower-box"> 
@@ -23,11 +18,17 @@ After that, insert this piece of code anywhere in your page :
 </div>
 ```
 
-Note that you can use any HTML tag for any element, but these are the most suitable.
-You can embed as many TextShower boxes as you want in your page. You can also add as many classes as you want
-to the elements.
+and embedding TextShower somewhere before closing the <body> tag :
 
-Suggestions
+``` html
+<script src="path/to/TextShower.js"></script>
+```
+
+You can embed as many TextShower boxes as you want in your page. It will just be a little slower for each box. You can also add as many classes as you want to the elements.
+
+If you want to customize the behavior of TextShower, it's here.
+
+Suggestions or issues
 ======
 
-You can send any suggestion at yohaiberreby@gmail.com.
+[Open an issue](https://github.com/filsmick/TextShower/issues) for any problem or suggestion.
