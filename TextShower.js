@@ -8,7 +8,7 @@ heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
 marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
 modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
-if (typeof document.querySelector('meta[data-TextShower]') !== 'object') {
+if (document.querySelector('meta[data-TextShower]') != null) {
 	var settings = document.querySelector('meta[data-TextShower]').getAttribute('data-TextShower');
 	var settingsArray = settings.split(' ');
 
@@ -100,7 +100,7 @@ function PrepareBox(box) {
 		if (!deployed) {
 			deployed = true;
 
-			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
+			if (modifyTitle == true) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
 			textElement.style.height = prevHeight;
 			textElement.style.margin = prevMargin;
 			textElement.style.paddingTop = prevPaddingTop;
@@ -110,7 +110,7 @@ function PrepareBox(box) {
 		else {
 			deployed = false;
 
-			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
+			if (modifyTitle == true) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
 			textElement.style.height = '0px';
 			textElement.style.margin = '0 0 0 0';
 			textElement.style.paddingTop = '0';
