@@ -2,6 +2,8 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 // Init
 
+var transitionEnd = whichTransitionEvent();
+
 heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
 heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
@@ -24,14 +26,35 @@ String.prototype.splice = function( idx, rem, s ) {
     return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
 };
 
-function addEvent(element, event, func) {
-    if (element.addEventListener) {
-        element.addEventListener(event, func, false);
-    } 
-    else {
-        element.attachEvent('on' + event, func);
+function addEvent(element, eventName, handler) {
+  if (element.addEventListener) {
+    element.addEventListener(eventName, handler, false);
+  }
+  else if (element.attachEvent) {
+    element.attachEvent('on' + eventName, handler);
+  }
+  else {
+    element['on' + eventName] = handler;
+  }
+}
+
+function whichTransitionEvent(){
+    var t;
+    var el = document.createElement('fakeelement');
+    var transitions = {
+      'transition':'transitionend',
+      'OTransition':'oTransitionEnd',
+      'MozTransition':'transitionend',
+      'WebkitTransition':'webkitTransitionEnd'
     }
-};
+
+    for(t in transitions){
+        if( el.style[t] !== undefined ){
+            return transitions[t];
+        }
+    }
+}
+
 
 document.getElementsByAttribute = Element.prototype.getElementsByAttribute = function(attr) {
     var nodeList = this.getElementsByTagName('*');
@@ -100,17 +123,31 @@ function PrepareBox(box) {
 		if (!deployed) {
 			deployed = true;
 
-			if (modifyTitle == true) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
+			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
 			textElement.style.height = prevHeight;
 			textElement.style.margin = prevMargin;
 			textElement.style.paddingTop = prevPaddingTop;
 			textElement.style.paddingBottom = prevPaddingBottom;
+
+			addEvent(textElement, transitionEnd, function(e) {
+				e.stopPropagation();
+
+			    if (e.propertyName.indexOf('transform') != -1) {
+			        var target = e.target;
+			        if (textElement.className.indexOf(' notransition') != 1) { textElement.className += ' notransition'; };
+			        target.style.height = 'auto';
+			    }
+			});
+
 		}
 
 		else {
 			deployed = false;
 
-			if (modifyTitle == true) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
+			prevHeight = getComputedStyle(textElement).height;
+			textElement.className = textElement.className.replace(' notransition', '');
+
+			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
 			textElement.style.height = '0px';
 			textElement.style.margin = '0 0 0 0';
 			textElement.style.paddingTop = '0';
