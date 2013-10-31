@@ -8,7 +8,7 @@ heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
 marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
 modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
-if (typeof document.querySelector('meta[data-TextShower]') !== 'undefined') {
+if (typeof document.querySelector('meta[data-TextShower]') !== 'object') {
 	var settings = document.querySelector('meta[data-TextShower]').getAttribute('data-TextShower');
 	var settingsArray = settings.split(' ');
 
