@@ -100,7 +100,7 @@ function PrepareBox(box) {
 		if (!deployed) {
 			deployed = true;
 
-			if (modifyTitle == true) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
+			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
 			textElement.style.height = prevHeight;
 			textElement.style.margin = prevMargin;
 			textElement.style.paddingTop = prevPaddingTop;
@@ -110,7 +110,7 @@ function PrepareBox(box) {
 		else {
 			deployed = false;
 
-			if (modifyTitle == true) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
+			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
 			textElement.style.height = '0px';
 			textElement.style.margin = '0 0 0 0';
 			textElement.style.paddingTop = '0';
