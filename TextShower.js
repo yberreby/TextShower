@@ -129,26 +129,25 @@ function PrepareBox(box) {
 			textElement.style.paddingTop = prevPaddingTop;
 			textElement.style.paddingBottom = prevPaddingBottom;
 
-			function EndFunction(e) {
-				e.stopPropagation();
+			var durationArray = [], 
+			pureHeightDelay = heightDelay.match(/[+-]?\d+\.\d+/g).map(function(v) { return parseFloat(v); }), 
+			pureMarginDelay = marginDelay.match(/[+-]?\d+\.\d+/g).map(function(v) { return parseFloat(v); });
+			durationArray.push(pureHeightDelay, pureMarginDelay);
 
-			    if (e.propertyName.indexOf('transform') != -1) {
-			        var target = e.target;
-			        textElement.className += ' notransition';
-			        target.style.height = 'auto';
-			    }
-			}
-
-			addEvent(textElement, transitionEnd, function(e) {
-				EndFunction(e);
-			});
+			setTimeout(function transEnd() {
+			    //textElement.className += ' notransition';
+			    textElement.style.height = 'auto';
+				//alert('test')
+			}, Math.max.apply(Math, durationArray) * 1000 + 300);
 
 		}
 
 		else {
 			deployed = false;
 
-			textElement.className = textElement.className.replace(' notransition', '');
+			prevHeight = textElement.style.height = getComputedStyle(textElement).height;
+			textElement.style.height + getComputedStyle(textElement).height;
+			//textElement.className = textElement.className.replace(' notransition', '');
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
 			textElement.style.height = '0px';
