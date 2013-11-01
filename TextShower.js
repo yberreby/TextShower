@@ -2,7 +2,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 // Init
 
-var transitionEnd = whichTransitionEvent();
+var transitionEnd = whichTransitionEvent(), timer, timer2;
 
 heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
@@ -134,26 +134,26 @@ function PrepareBox(box) {
 			pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
 			durationArray.push(pureHeightDelay, pureMarginDelay);
 
-			var timer = setTimeout(function transEnd() {
+			timer = setTimeout(function transEnd() {
 			    textElement.className += ' notransition';
-			    alert('teee');
 			    textElement.style.height = 'auto';
+			    prevHeight = getComputedStyle(textElement).height;
 			    textElement.className = textElement.className.replace(' notransition', '');
-				//alert('test')
-			}, Math.max.apply(Math, durationArray) * 1000 + 300);
+			}, Math.max.apply(Math, durationArray) * 1000);
 
 		}
 
 		else {
 			deployed = false;
 
-			clearTimeout(timer);
-
-			prevHeight = textElement.style.height = getComputedStyle(textElement).height;
-			textElement.style.height + getComputedStyle(textElement).height;
-			//textElement.className = textElement.className.replace(/ notransition/g, '');
+			clearTimeout(timer),
+			clearTimeout(timer2);
+			
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
+
+			textElement.style.height = getComputedStyle(textElement).height;
+
 			textElement.style.height = '0px';
 			textElement.style.margin = '0 0 0 0';
 			textElement.style.paddingTop = '0';
