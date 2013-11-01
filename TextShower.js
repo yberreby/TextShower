@@ -130,13 +130,15 @@ function PrepareBox(box) {
 			textElement.style.paddingBottom = prevPaddingBottom;
 
 			var durationArray = [], 
-			pureHeightDelay = heightDelay.match(/[+-]?\d+\.\d+/g).map(function(v) { return parseFloat(v); }), 
-			pureMarginDelay = marginDelay.match(/[+-]?\d+\.\d+/g).map(function(v) { return parseFloat(v); });
+			pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g)),
+			pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
 			durationArray.push(pureHeightDelay, pureMarginDelay);
 
-			setTimeout(function transEnd() {
-			    //textElement.className += ' notransition';
+			var timer = setTimeout(function transEnd() {
+			    textElement.className += ' notransition';
+			    alert('teee');
 			    textElement.style.height = 'auto';
+			    textElement.className = textElement.className.replace(' notransition', '');
 				//alert('test')
 			}, Math.max.apply(Math, durationArray) * 1000 + 300);
 
@@ -145,9 +147,11 @@ function PrepareBox(box) {
 		else {
 			deployed = false;
 
+			clearTimeout(timer);
+
 			prevHeight = textElement.style.height = getComputedStyle(textElement).height;
 			textElement.style.height + getComputedStyle(textElement).height;
-			//textElement.className = textElement.className.replace(' notransition', '');
+			//textElement.className = textElement.className.replace(/ notransition/g, '');
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
 			textElement.style.height = '0px';
