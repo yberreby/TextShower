@@ -129,14 +129,18 @@ function PrepareBox(box) {
 			textElement.style.paddingTop = prevPaddingTop;
 			textElement.style.paddingBottom = prevPaddingBottom;
 
-			addEvent(textElement, transitionEnd, function(e) {
+			function EndFunction(e) {
 				e.stopPropagation();
 
 			    if (e.propertyName.indexOf('transform') != -1) {
 			        var target = e.target;
-			        if (textElement.className.indexOf(' notransition') != 1) { textElement.className += ' notransition'; };
+			        textElement.className += ' notransition';
 			        target.style.height = 'auto';
 			    }
+			}
+
+			addEvent(textElement, transitionEnd, function(e) {
+				EndFunction(e);
 			});
 
 		}
@@ -144,7 +148,6 @@ function PrepareBox(box) {
 		else {
 			deployed = false;
 
-			prevHeight = getComputedStyle(textElement).height;
 			textElement.className = textElement.className.replace(' notransition', '');
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
