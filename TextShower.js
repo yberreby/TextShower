@@ -88,9 +88,13 @@ function PrepareBox(box) {
 	textElement.offsetHeight;
 	textElement.className = textElement.className.replace(' notransition', '');
 
+	if(window.location.hash.substring(1) == titleElement.id) {
+    	changeState(titleElement, textElement);
+    }
+
 	var deployed = false;
 
-	addEvent(titleElement, 'click', function changeState(box) {
+	function changeState(titleElement, textElement) {
 		if (!deployed) {
 			deployed = true;
 
@@ -143,7 +147,9 @@ function PrepareBox(box) {
 				textElement.style.paddingBottom = '0';
 			}, 0);
 		}
-})
+	}
+
+	addEvent(titleElement, 'click', changeState)
 }
 
 var boxes = document.getElementsByClassName('TextShower-box');
@@ -153,5 +159,6 @@ for (var i = boxes.length - 1; i >= 0; i--) {
 };
 }
 
-// Edit the arguments of this function to customize the script behavior
+// Edit the arguments of this function to customize the global script behavior
+// Can be overwritten by the custom meta tag
 TextShower('0.8s', '0.3s', 'ease', 'linear', true);
