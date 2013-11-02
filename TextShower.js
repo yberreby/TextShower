@@ -101,9 +101,9 @@ function PrepareBox(box) {
 		}, 1);
 
 		textElement.className += ' notransition';
+		changeState(titleElement, textElement);
 	    	
 	    	setTimeout(function() {
-	    		changeState(titleElement, textElement);
     			textElement.className = textElement.className.replace(' notransition', '');
 			titleElement.scrollIntoView(true);
 		}, 0);
