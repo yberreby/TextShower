@@ -95,8 +95,19 @@ function PrepareBox(box) {
 			deployed = true;
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
+
+			textElement.className += ' notransition';
+
+			var prevHeightActual = getComputedStyle(textElement).height;
 			textElement.style.height = 'auto';
-			textElement.style.height = prevHeight = getComputedStyle(textElement).height;;
+			prevHeight = getComputedStyle(textElement).height;
+			textElement.style.height = prevHeightActual;
+			alert(prevHeight2)
+
+			textElement.className = textElement.className.replace(' notransition', '');
+
+			
+			textElement.style.height = prevHeight;
 			textElement.style.margin = prevMargin;
 			textElement.style.paddingTop = prevPaddingTop;
 			textElement.style.paddingBottom = prevPaddingBottom;
