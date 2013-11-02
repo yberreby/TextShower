@@ -1,3 +1,13 @@
+/*
+ * Pure JS TextShower
+ * http://filsmick.github.io/TextShower
+ *
+ * Copyright 2013 Yohaï Berreby
+ * Free to use under the GPLv2 license.
+ * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+*/
+
 function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modifyTitle) {
 
 // Init
@@ -109,7 +119,7 @@ function PrepareBox(box) {
 		}, 0);
 	}
 
-	function changeState(titleElement, textElement, callback) {
+	function changeState(titleElement, textElement) {
 		if (!deployed) {
 			deployed = true;
 
@@ -155,10 +165,6 @@ function PrepareBox(box) {
 				textElement.style.paddingTop = '0';
 				textElement.style.paddingBottom = '0';
 			}, 0);
-		}
-
-		if (typeof callback !== 'undefined') {
-			callback();
 		}
 	}
 
