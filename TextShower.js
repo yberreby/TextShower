@@ -2,8 +2,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 // Init
 
-var timer, timer2, boxes = document.getElementsByClassName('TextShower-box');
-
+var timer, timer2;
 
 heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
@@ -117,7 +116,7 @@ function PrepareBox(box) {
 		else {
 			deployed = false;
 
-			clearTimeout(timer);
+			clearTimeout(timer),
 			clearTimeout(timer2);
 			
 
@@ -135,6 +134,8 @@ function PrepareBox(box) {
 		}
 })
 }
+
+var boxes = document.getElementsByClassName('TextShower-box');
 
 for (var i = boxes.length - 1; i >= 0; i--) {
 	PrepareBox(boxes[i]);
