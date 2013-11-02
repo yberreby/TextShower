@@ -1,8 +1,8 @@
 Presentation
 ======
 
-Tired of the heavy jQuery scripts for everything ? Don't want to overload your server and the client with
-tons of useless code for just a text slider ? TextShower is made for you !
+Tired of the heavy jQuery scripts for everything? Don't want to overload your server and the client with
+tons of useless code for just a text slider? TextShower is made for you!
 
 <a href="http://filsmick.github.io/TextShower/">Presentation, instructions and examples</a>
 
@@ -18,7 +18,7 @@ You can simply start by uploading TextShower.js or TextShower.min.js to your FTP
 </div>
 ```
 
-and embedding TextShower somewhere before closing the <body> tag :
+and embedding TextShower just before closing the <body> tag :
 
 ``` html
 <script src="path/to/TextShower.js"></script>
@@ -26,7 +26,7 @@ and embedding TextShower somewhere before closing the <body> tag :
 
 You can embed as many TextShower boxes as you want in your page. It will just be a little slower for each box. You can also add as many classes as you want to the elements.
 
-If you want to customize the behavior of TextShower, it's here.
+If you want to customize the behavior of TextShower, [it's here](.
 
 Suggestions or issues
 ======
