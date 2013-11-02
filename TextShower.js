@@ -101,12 +101,13 @@ function PrepareBox(box) {
 		}, 1);
 
 		textElement.className += ' notransition';
-    	changeState(titleElement, textElement);
-    	setTimeout(function() {
-    		textElement.className = textElement.className.replace(' notransition', '');
+	    	
+	    	setTimeout(function() {
+	    		changeState(titleElement, textElement);
+    			textElement.className = textElement.className.replace(' notransition', '');
 			titleElement.scrollIntoView(true);
-		}, Math.max.apply(Math, durationArray) * 1000);
-    }
+		}, 0);
+	}
 
 	function changeState(titleElement, textElement, callback) {
 		if (!deployed) {
