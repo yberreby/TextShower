@@ -2,7 +2,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 // Init
 
-var transitionEnd = whichTransitionEvent(), timer, timer2;
+var timer, timer2;
 
 heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
@@ -37,35 +37,6 @@ function addEvent(element, eventName, handler) {
     element['on' + eventName] = handler;
   }
 }
-
-function whichTransitionEvent(){
-    var t;
-    var el = document.createElement('fakeelement');
-    var transitions = {
-      'transition':'transitionend',
-      'OTransition':'oTransitionEnd',
-      'MozTransition':'transitionend',
-      'WebkitTransition':'webkitTransitionEnd'
-    }
-
-    for(t in transitions){
-        if( el.style[t] !== undefined ){
-            return transitions[t];
-        }
-    }
-}
-
-
-document.getElementsByAttribute = Element.prototype.getElementsByAttribute = function(attr) {
-    var nodeList = this.getElementsByTagName('*');
-    var nodeArray = [];
-
-    for (var i = 0, elem; elem = nodeList[i]; i++) {
-        if ( elem.getAttribute(attr) ) nodeArray.push(elem);
-    }
-
-    return nodeArray;
-};
 
 // Add transitions rules to the page
 var style = document.createElement('style');
@@ -138,7 +109,6 @@ function PrepareBox(box) {
 			    textElement.className += ' notransition';
 			    textElement.style.height = 'auto';
 			    prevHeight = getComputedStyle(textElement).height;
-			    textElement.className = textElement.className.replace(' notransition', '');
 			}, Math.max.apply(Math, durationArray) * 1000);
 
 		}
@@ -152,12 +122,15 @@ function PrepareBox(box) {
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
 
-			textElement.style.height = getComputedStyle(textElement).height;
+			prevHeight = textElement.style.height = getComputedStyle(textElement).height;
 
-			textElement.style.height = '0px';
-			textElement.style.margin = '0 0 0 0';
-			textElement.style.paddingTop = '0';
-			textElement.style.paddingBottom = '0';
+			setTimeout(function() {
+				textElement.className = textElement.className.replace(' notransition', '');
+				textElement.style.height = '0px';
+				textElement.style.margin = '0 0 0 0';
+				textElement.style.paddingTop = '0';
+				textElement.style.paddingBottom = '0';
+			}, 0);
 		}
 })
 }
