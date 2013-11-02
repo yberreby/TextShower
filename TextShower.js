@@ -95,6 +95,8 @@ function PrepareBox(box) {
 			deployed = true;
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
+			textElement.style.height = 'auto';
+			prevHeight = getComputedStyle(textElement).height;
 			textElement.style.height = prevHeight;
 			textElement.style.margin = prevMargin;
 			textElement.style.paddingTop = prevPaddingTop;
