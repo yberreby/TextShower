@@ -88,11 +88,11 @@ function PrepareBox(box) {
 	textElement.offsetHeight;
 	textElement.className = textElement.className.replace(' notransition', '');
 
-	if(window.location.hash.substring(1) == titleElement.id) {
+	var deployed = false;
+
+	if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
     	changeState(titleElement, textElement);
     }
-
-	var deployed = false;
 
 	function changeState(titleElement, textElement) {
 		if (!deployed) {
@@ -125,7 +125,6 @@ function PrepareBox(box) {
 			    textElement.style.height = 'auto';
 			    prevHeight = getComputedStyle(textElement).height;
 			}, Math.max.apply(Math, durationArray) * 1000);
-
 		}
 
 		else {
@@ -149,7 +148,9 @@ function PrepareBox(box) {
 		}
 	}
 
-	addEvent(titleElement, 'click', changeState)
+	addEvent(titleElement, 'click', function() {
+		changeState(titleElement, textElement);
+	})
 }
 
 var boxes = document.getElementsByClassName('TextShower-box');
