@@ -96,21 +96,20 @@ function PrepareBox(box) {
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('+', '-'); };
 
-			textElement.className += ' notransition';
 
-			var prevHeightActual = getComputedStyle(textElement).height;
+			var actualHeight = getComputedStyle(textElement).height;
+			textElement.className += ' notransition';
 			textElement.style.height = 'auto';
 			prevHeight = getComputedStyle(textElement).height;
-			textElement.style.height = prevHeightActual;
-			alert(prevHeight2)
+			textElement.style.height = actualHeight;
 
-			textElement.className = textElement.className.replace(' notransition', '');
-
-			
-			textElement.style.height = prevHeight;
-			textElement.style.margin = prevMargin;
-			textElement.style.paddingTop = prevPaddingTop;
-			textElement.style.paddingBottom = prevPaddingBottom;
+			setTimeout(function() {
+				textElement.className = textElement.className.replace(' notransition', '');
+				textElement.style.height = prevHeight;
+				textElement.style.margin = prevMargin;
+				textElement.style.paddingTop = prevPaddingTop;
+				textElement.style.paddingBottom = prevPaddingBottom;
+			}, 0);
 
 			var durationArray = [], 
 			pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g)),
