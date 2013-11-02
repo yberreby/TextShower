@@ -117,7 +117,8 @@ function PrepareBox(box) {
 		else {
 			deployed = false;
 
-			clearTimeout(timer), clearTimeout(timer2);
+			clearTimeout(timer);
+			clearTimeout(timer2);
 			
 
 			if (modifyTitle) { titleElement.textContent = titleElement.textContent.replace('-', '+'); };
