@@ -113,7 +113,7 @@ function PrepareBox(box) {
 	
 	anchorNav();
 
-	function changeState(titleElement, textElement, callback) {
+	function changeState(titleElement, textElement) {
 		if (!deployed) {
 			deployed = true;
 
@@ -159,10 +159,6 @@ function PrepareBox(box) {
 				textElement.style.paddingTop = '0';
 				textElement.style.paddingBottom = '0';
 			}, 0);
-		}
-
-		if (typeof callback !== 'undefined') {
-			callback();
 		}
 	}
 
