@@ -94,26 +94,23 @@ function PrepareBox(box) {
 	pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g)),
 	pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
 	durationArray.push(pureHeightDelay, pureMarginDelay);
-	
-	function anchorNav() {
-		if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
-		textElement.className += ' notransition';
-		changeState(titleElement, textElement, false);
-		setTimeout(function() {
-	    		titleElement.scrollIntoView(true);
-		}, 0);
 
+	if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
 		setTimeout(function() {
-	   		textElement.className = textElement.className.replace(' notransition', '');
-	   	}, Math.max.apply(Math, durationArray) * 1000);
-		}
+			window.scrollTo(0, 0);
+		}, 1);
+
+		textElement.className += ' notransition';
+		
+	    	
+	    	setTimeout(function() {
+	    		changeState(titleElement, textElement);
+				titleElement.scrollIntoView(true);
+    			textElement.className = textElement.className.replace(' notransition', '');
+		}, 0);
 	}
 
-	addEvent(window, 'hashchange', anchorNav)
-	
-	anchorNav();
-
-	function changeState(titleElement, textElement, deployed) {
+	function changeState(titleElement, textElement, callback) {
 		if (!deployed) {
 			deployed = true;
 
@@ -159,6 +156,10 @@ function PrepareBox(box) {
 				textElement.style.paddingTop = '0';
 				textElement.style.paddingBottom = '0';
 			}, 0);
+		}
+
+		if (typeof callback !== 'undefined') {
+			callback();
 		}
 	}
 
