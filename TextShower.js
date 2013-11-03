@@ -98,7 +98,11 @@ function PrepareBox(box) {
 	function anchorNav() {
 		if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
 		textElement.className += ' notransition';
-		changeState(titleElement, textElement);
+
+		if (!deployed) {
+			changeState(titleElement, textElement);
+		}
+
 		setTimeout(function() {
 	    		titleElement.scrollIntoView(true);
 		}, 0);
