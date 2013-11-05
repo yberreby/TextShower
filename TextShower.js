@@ -83,7 +83,11 @@ function PrepareBox(box) {
 	textElement.style.margin = '0 0 0 0';
 	textElement.style.paddingTop = '0';
 	textElement.style.paddingBottom = '0';
+
 	titleElement.style.cursor = 'pointer';
+	titleElement.style.marginBottom = titleElement.style.marginBottom / 2;
+
+
 
 	textElement.offsetHeight;
 	textElement.className = textElement.className.replace(' notransition', '');
