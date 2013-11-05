@@ -32,3 +32,9 @@ Suggestions or issues
 ======
 
 [Open an issue](https://github.com/filsmick/TextShower/issues) for any problem or suggestion.
+
+
+Do you like TextShower ?
+=====
+
+If you want to support TextShower, you can [![Flattr it](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=filsmick&url=github.com/TextShower&title=TextShower&language=&tags=github&category=software). It will help me to grow :)
