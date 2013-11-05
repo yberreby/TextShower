@@ -1,7 +1,6 @@
-<script id='fb9djff'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');f.src='//api.flattr.com/button/view/?uid=filsmick&button=compact&url=http%3A%2F%2Fgithub.com%2Ffilsmick';f.title='Flattr';f.height=20;f.width=110;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fb9djff');</script>
-
 Presentation
 ======
+[![Flattr this!](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=filsmick&url=github.com/TextShower&title=TextShower&language=&tags=github&category=software)
 
 Tired of the heavy jQuery scripts for everything? Don't want to overload your server and the client with
 tons of useless code for just a text slider? TextShower is made for you!
@@ -36,7 +35,7 @@ Suggestions or issues
 [Open an issue](https://github.com/filsmick/TextShower/issues) for any problem or suggestion.
 
 
-Do you like TextShower ?
+You like TextShower ?
 =====
 
-If you want to support TextShower, you can [![Flattr it](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=filsmick&url=github.com/TextShower&title=TextShower&language=&tags=github&category=software). It will help me to grow :)
+If you want to support TextShower, you can flattr me with the button at the top of the page. It will help me to develop TextShower and to create more cool things!
