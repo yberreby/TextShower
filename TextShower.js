@@ -124,19 +124,21 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 
 	function anchorNav(titleElement, textElement) {
-		textElement.className += ' notransition';
+		if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
+			textElement.className += ' notransition';
 
-		if (!deployed) {
-			changeState(titleElement, textElement);
+			if (!deployed) {
+				changeState(titleElement, textElement);
+			}
+
+			setTimeout(function() {
+		    		titleElement.scrollIntoView(true);
+			}, 0);
+
+			setTimeout(function() {
+		   		textElement.className = textElement.className.replace(' notransition', '');
+		   	}, Math.max.apply(Math, durationArray) * 1000);
 		}
-
-		setTimeout(function() {
-	    		titleElement.scrollIntoView(true);
-		}, 0);
-
-		setTimeout(function() {
-	   		textElement.className = textElement.className.replace(' notransition', '');
-	   	}, Math.max.apply(Math, durationArray) * 1000);
 	}
 
 	// Activate TextShower
@@ -175,9 +177,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 			changeState(titleElement, textElement);
 		})
 
-		if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
-			anchorNav(titleElement, textElement);
-		}
+		anchorNav(titleElement, textElement);
 	}
 
 
@@ -187,7 +187,11 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		prepareBox(boxes[i]);
 	};
 
-	addEvent(window, 'hashchange', anchorNav);
+	window.titleElement = titleElement, window.textElement = textElement;
+
+	addEvent(window, 'hashchange', function() {
+		anchorNav(titleElement, textElement);
+	});
 
 }
 // Edit the arguments of this function to customize the global script behavior
