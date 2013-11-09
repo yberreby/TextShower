@@ -2,7 +2,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 	// Init
 
-	var timer, timer2, boxes, deployed, actualHeight, prevHeight, prevHeight, prevPaddingTop, prevPaddingBottom, durationArray;
+	var timer, timer2, boxes, actualHeight, prevHeight, prevHeight, prevPaddingTop, prevPaddingBottom, durationArray;
 
 	heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 	marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
@@ -123,21 +123,25 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 	}
 
 
-	function anchorNav(titleElement, textElement) {
-		if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
-			textElement.className += ' notransition';
+	function anchorNav() {
+		for (var i = boxes.length - 1; i >= 0; i--) {
+			var box = boxes[i], 
+			titleElement = box.getElementsByClassName('TextShower-title')[0],
+			textElement = box.getElementsByClassName('TextShower-text')[0];
 
-			if (!deployed) {
-				changeState(titleElement, textElement);
+			if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
+				textElement.className += ' notransition';
+
+				open(titleElement, textElement);
+
+				setTimeout(function() {
+			    	titleElement.scrollIntoView(true);
+				}, 0);
+
+				setTimeout(function() {
+			   		textElement.className = textElement.className.replace(' notransition', '');
+			   	}, Math.max.apply(Math, durationArray) * 1000);
 			}
-
-			setTimeout(function() {
-		    		titleElement.scrollIntoView(true);
-			}, 0);
-
-			setTimeout(function() {
-		   		textElement.className = textElement.className.replace(' notransition', '');
-		   	}, Math.max.apply(Math, durationArray) * 1000);
 		}
 	}
 
@@ -176,8 +180,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		addEvent(titleElement, 'click', function() {
 			changeState(titleElement, textElement);
 		})
-
-		anchorNav(titleElement, textElement);
 	}
 
 
@@ -187,12 +189,10 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		prepareBox(boxes[i]);
 	};
 
-	window.titleElement = titleElement, window.textElement = textElement;
-
+	anchorNav();
 	addEvent(window, 'hashchange', function() {
-		anchorNav(titleElement, textElement);
+		anchorNav();
 	});
-
 }
 // Edit the arguments of this function to customize the global script behavior
 // Can be overwritten by the custom meta tag
