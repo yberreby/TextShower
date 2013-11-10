@@ -38,6 +38,24 @@ function addEvent(element, eventName, handler) {
   }
 }
 
+function anchorNav(titleElement, textElement, changeState, deployed, durationArray) {
+	if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
+	textElement.className += ' notransition';
+
+	if (!deployed) {
+		changeState(titleElement, textElement);
+	}
+
+	setTimeout(function() {
+    		titleElement.scrollIntoView(true);
+	}, 0);
+
+	setTimeout(function() {
+   		textElement.className = textElement.className.replace(' notransition', '');
+   	}, Math.max.apply(Math, durationArray) * 1000);
+	}
+}
+
 // Add transitions rules to the page
 var style = document.createElement('style');
 style.type = 'text/css';
@@ -98,28 +116,13 @@ function PrepareBox(box) {
 	pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g)),
 	pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
 	durationArray.push(pureHeightDelay, pureMarginDelay);
+
+
+	addEvent(window, 'hashchange', function() {
+		anchorNav(titleElement, textElement, changeState, deployed, durationArray);
+	})
 	
-	function anchorNav() {
-		if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
-		textElement.className += ' notransition';
-
-		if (!deployed) {
-			changeState(titleElement, textElement);
-		}
-
-		setTimeout(function() {
-	    		titleElement.scrollIntoView(true);
-		}, 0);
-
-		setTimeout(function() {
-	   		textElement.className = textElement.className.replace(' notransition', '');
-	   	}, Math.max.apply(Math, durationArray) * 1000);
-		}
-	}
-
-	addEvent(window, 'hashchange', anchorNav)
-	
-	anchorNav();
+	anchorNav(titleElement, textElement, changeState, deployed, durationArray);
 
 	function changeState(titleElement, textElement) {
 		if (!deployed) {
