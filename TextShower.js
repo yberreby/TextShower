@@ -39,7 +39,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
         }
     }
 
-    // If the anchor is the one of a box, unfold this box and jump to it
+    // Anchors support
 
     function anchorNav(titleElement, textElement, changeState, deployed, durationArray) {
         if (window.location.hash.substring(1) == titleElement.id != '') {
@@ -87,7 +87,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 
     // Prepare boxes
-
     function PrepareBox(box) {
         var titleElement = box.getElementsByClassName('TextShower-title')[0],
             textElement = box.getElementsByClassName('TextShower-text')[0];
@@ -127,6 +126,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
         anchorNav(titleElement, textElement, changeState, deployed, durationArray);
 
+        // Toggle box state
         function changeState(titleElement, textElement) {
             if (!deployed) {
                 deployed = true;
@@ -177,6 +177,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
             }
         }
 
+        // Toggle box state on click
         addEvent(titleElement, 'click', function() {
             changeState(titleElement, textElement);
         })
