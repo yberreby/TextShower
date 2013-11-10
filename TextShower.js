@@ -2,7 +2,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 	// Init
 
-	var timer, timer2, actualHeight, prevHeight, prevHeight, prevPaddingTop, prevPaddingBottom, durationArray;
+	var timer, timer2, boxes, actualHeight, prevHeight, prevHeight, prevPaddingTop, prevPaddingBottom, durationArray;
 
 	heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 	marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
@@ -125,9 +125,9 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 	function anchorNav() {
 		for (var i = boxes.length - 1; i >= 0; i--) {
-			var boxElement = boxes[i], 
-			titleElement = boxElement.getElementsByClassName('TextShower-title')[0],
-			textElement = boxElement.getElementsByClassName('TextShower-text')[0];
+			var box = boxes[i], 
+			titleElement = box.getElementsByClassName('TextShower-title')[0],
+			textElement = box.getElementsByClassName('TextShower-text')[0];
 
 			if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
 				textElement.className += ' notransition';
@@ -148,8 +148,8 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 	// Activate TextShower
 
 	function prepareBox(box) {
-		var titleElement = boxElement.getElementsByClassName('TextShower-title')[0],
-		textElement = boxElement.getElementsByClassName('TextShower-text')[0];
+		var titleElement = box.getElementsByClassName('TextShower-title')[0],
+		textElement = box.getElementsByClassName('TextShower-text')[0];
 
 		if (modifyTitle) { titleElement.textContent = titleElement.textContent.splice(0, 0, "+ "); };
 
@@ -183,7 +183,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 	}
 
 
-	var boxes = document.getElementsByClassName('TextShower-boxElement');
+	boxes = document.getElementsByClassName('TextShower-box');
 
 	for (var i = boxes.length - 1; i >= 0; i--) {
 		prepareBox(boxes[i]);
@@ -194,7 +194,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		anchorNav();
 	});
 }
-
 // Edit the arguments of this function to customize the global script behavior
 // Can be overwritten by the custom meta tag
 TextShower('0.8s', '0.3s', 'ease', 'linear', true);
