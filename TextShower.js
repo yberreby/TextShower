@@ -42,7 +42,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     // If the anchor is the one of a box, unfold this box and jump to it
 
     function anchorNav(titleElement, textElement, changeState, deployed, durationArray) {
-        if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
+        if (window.location.hash.substring(1) == titleElement.id != '') {
             textElement.className += ' notransition';
 
             if (!deployed) {
@@ -63,26 +63,26 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     var style = document.createElement('style');
     style.type = 'text/css';
     style.innerHTML = '.TextShower-title {\
--moz-user-select: none;\
--webkit-user-select: none;\
--ms-user-select:none;\
-user-select:none;\
-} \
-.TextShower-text {\
-overflow: hidden;\
--webkit-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
--moz-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
--o-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
--ms-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
-}\
-.notransition {\
--webkit-transition: none !important;\
--moz-transition: none !important;\
--o-transition: none !important;\
--ms-transition: none !important;\
-transition: none !important;\
-}';
+	-moz-user-select: none;\
+	-webkit-user-select: none;\
+	-ms-user-select:none;\
+	user-select:none;\
+	} \
+	.TextShower-text {\
+	overflow: hidden;\
+	-webkit-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-moz-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-o-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-ms-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	}\
+	.notransition {\
+	-webkit-transition: none !important;\
+	-moz-transition: none !important;\
+	-o-transition: none !important;\
+	-ms-transition: none !important;\
+	transition: none !important;\
+	}';
     document.getElementsByTagName('head')[0].appendChild(style);
 
 
