@@ -147,28 +147,29 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 	// Activate TextShower
 
-	function prepareBox(box) {
-		var titleElement = box.getElementsByClassName('TextShower-title')[0],
-		textElement = box.getElementsByClassName('TextShower-text')[0];
+	function prepareBox(box, i) {
+		var titleElement = [], textElement = [],
+		titleElement[i] = box.getElementsByClassName('TextShower-title')[0],
+		textElement[i] = box.getElementsByClassName('TextShower-text')[0];
 
 		if (modifyTitle) { titleElement.textContent = titleElement.textContent.splice(0, 0, "+ "); };
 
-		textElement.className += ' notransition';
+		textElement[i].className += ' notransition';
 
-		prevHeight = getComputedStyle(textElement).height,
-		prevMargin = getComputedStyle(textElement).margin,
-		prevPaddingTop = getComputedStyle(textElement).paddingTop,
-		prevPaddingBottom = getComputedStyle(textElement).paddingBottom;
-		textElement.style.height = '0px';
-		textElement.style.margin = '0 0 0 0';
-		textElement.style.paddingTop = '0';
-		textElement.style.paddingBottom = '0';
+		prevHeight = getComputedStyle(textElement[i]).height,
+		prevMargin = getComputedStyle(textElement[i]).margin,
+		prevPaddingTop = getComputedStyle(textElement[i]).paddingTop,
+		prevPaddingBottom = getComputedStyle(textElement[i]).paddingBottom;
+		textElement[i].style.height = '0px';
+		textElement[i].style.margin = '0 0 0 0';
+		textElement[i].style.paddingTop = '0';
+		textElement[i].style.paddingBottom = '0';
 
-		titleElement.style.cursor = 'pointer';
-		titleElement.style.marginBottom = titleElement.style.marginBottom / 2;
+		titleElement[i].style.cursor = 'pointer';
+		titleElement[i].style.marginBottom = titleElement[i].style.marginBottom / 2;
 
-		textElement.offsetHeight;
-		textElement.className = textElement.className.replace(' notransition', '');
+		textElement[i].offsetHeight;
+		textElement[i].className = textElement[i].className.replace(' notransition', '');
 
 		deployed = false;
 
@@ -177,8 +178,8 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
 		durationArray.push(pureHeightDelay, pureMarginDelay);
 		
-		addEvent(titleElement, 'click', function() {
-			changeState(titleElement, textElement);
+		addEvent(titleElement[i], 'click', function() {
+			changeState(titleElement[i], textElement[i]);
 		})
 	}
 
@@ -186,7 +187,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 	boxes = document.getElementsByClassName('TextShower-box');
 
 	for (var i = boxes.length - 1; i >= 0; i--) {
-		prepareBox(boxes[i]);
+		prepareBox(boxes[i], i);
 	};
 
 	anchorNav();
