@@ -1,9 +1,14 @@
+/*!
+ * TextShower - Super simple CSS and JS TextSlider
+ * (c) 2013 Yohaï Berreby <yohaiberreby@gmail.com>
+ * License: https://github.com/filsmick/TextShower/blob/master/LICENSE
+ *
+ * http://filsmick.github.io/TextShower/
+ * http://github.com/filsmick/TextShower/
+ */
+
 function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modifyTitle) {
-
-    // Init
-    var timer, timer2;
-
-    // If an argument is not specified, use default one
+    // Default arguments
     heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
     marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
     heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
@@ -28,7 +33,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     }
 
     // Cross-browsers event handling function
-
     function addEvent(element, eventName, handler) {
         if (element.addEventListener) {
             element.addEventListener(eventName, handler, false);
@@ -40,14 +44,11 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     }
 
     // Anchors support
-
     function anchorNav(titleElement, textElement, changeState, deployed, durationArray) {
         if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
             textElement.className += ' notransition';
 
-            if (!deployed) {
-                changeState(titleElement, textElement);
-            }
+            if (!deployed) changeState(titleElement, textElement);
 
             setTimeout(function() {
                 titleElement.scrollIntoView(true);
@@ -86,14 +87,12 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     document.getElementsByTagName('head')[0].appendChild(style);
 
 
-    // Prepare boxes
-    function PrepareBox(box) {
+    // Close and prepare a box for the script
+    function prepareBox(box) {
         var titleElement = box.getElementsByClassName('TextShower-title')[0],
             textElement = box.getElementsByClassName('TextShower-text')[0];
 
-        if (modifyTitle) {
-            titleElement.textContent = titleElement.textContent.splice(0, 0, "+ ");
-        }
+        if (modifyTitle) titleElement.textContent = titleElement.textContent.splice(0, 0, "+ ");
 
         textElement.className += ' notransition';
 
@@ -131,10 +130,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
             if (!deployed) {
                 deployed = true;
 
-                if (modifyTitle) {
-                    titleElement.textContent = titleElement.textContent.replace('+', '-');
-                }
-
+                if (modifyTitle) titleElement.textContent = titleElement.textContent.replace('+', '-');
 
                 var actualHeight = getComputedStyle(textElement).height;
                 textElement.className += ' notransition';
@@ -150,7 +146,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
                     textElement.style.paddingBottom = prevPaddingBottom;
                 }, 0);
 
-                timer = setTimeout(function transEnd() {
+                var timer = setTimeout(function transEnd() {
                     textElement.className += ' notransition';
                     textElement.style.height = 'auto';
                     prevHeight = getComputedStyle(textElement).height;
@@ -158,12 +154,10 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
             } else {
                 deployed = false;
 
-                clearTimeout(timer), clearTimeout(timer2);
+                clearTimeout(timer);
 
 
-                if (modifyTitle) {
-                    titleElement.textContent = titleElement.textContent.replace('-', '+');
-                }
+                if (modifyTitle) titleElement.textContent = titleElement.textContent.replace('-', '+');
 
                 prevHeight = textElement.style.height = getComputedStyle(textElement).height;
 
@@ -183,10 +177,11 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
         })
     }
 
+    // Prepare all boxes
     var boxes = document.getElementsByClassName('TextShower-box');
 
     for (var i = boxes.length - 1; i >= 0; i--) {
-        PrepareBox(boxes[i]);
+        prepareBox(boxes[i]);
     }
 }
 
