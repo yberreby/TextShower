@@ -150,13 +150,12 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
                 prevHeight = getComputedStyle(textElement).height;
                 textElement.style.height = actualHeight;
 
-                setTimeout(function() {
-                    textElement.className = textElement.className.replace(' notransition', '');
-                    textElement.style.height = prevHeight;
-                    textElement.style.margin = prevMargin;
-                    textElement.style.paddingTop = prevPaddingTop;
-                    textElement.style.paddingBottom = prevPaddingBottom;
-                }, 0);
+                textElement.offsetHeight;
+                textElement.className = textElement.className.replace(' notransition', '');
+                textElement.style.height = prevHeight;
+                textElement.style.margin = prevMargin;
+                textElement.style.paddingTop = prevPaddingTop;
+                textElement.style.paddingBottom = prevPaddingBottom;
 
                 timer = setTimeout(function transEnd() {
                     textElement.className += ' notransition';
