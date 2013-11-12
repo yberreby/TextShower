@@ -35,6 +35,10 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
         return (this.slice(0, idx) + s + this.slice(idx + Math.abs(rem)));
     };
 
+    function addStr(object, idx, s) {
+        return (object.slice(0, idx) + s + object.slice(idx + 0));
+    };
+
     // Cross-browsers event handling function
 
     function addEvent(element, eventName, handler) {
@@ -57,40 +61,35 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
                 changeState(titleElement, textElement);
             }
 
-            setTimeout(function() {
-                titleElement.scrollIntoView(true);
-            }, 0);
-
-            setTimeout(function() {
-                textElement.className = textElement.className.replace(' notransition', '');
-            }, Math.max.apply(Math, durationArray) * 1000);
+            titleElement.scrollIntoView(true);
+            textElement.className = textElement.className.replace(' notransition', '');
         }
     }
 
     // Add transitions rules to the page
     var style = document.createElement('style');
     style.type = 'text/css';
-    style.innerHTML = '.TextShower-title {\
-	-moz-user-select: none;\
-	-webkit-user-select: none;\
-	-ms-user-select:none;\
-	user-select:none;\
-	} \
-	.TextShower-text {\
-	overflow: hidden;\
-	-webkit-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
-	-moz-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
-	-o-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
-	-ms-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
-	transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
-	}\
-	.notransition {\
-	-webkit-transition: none !important;\
-	-moz-transition: none !important;\
-	-o-transition: none !important;\
-	-ms-transition: none !important;\
-	transition: none !important;\
-	}';
+    style.innerHTML = '.TextShower-title {'+
+	'-moz-user-select: none;'+
+	'-webkit-user-select: none;'+
+	'-ms-user-select:none;'+
+	'user-select:none;'+
+	'}'+
+	'.TextShower-text {'+
+	'overflow: hidden;'+
+	'-webkit-transition: height ' + heightDelay + ' ' + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
+	'-moz-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
+	'-o-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
+	'-ms-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
+	'transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
+	'}'+
+	'.notransition {'+
+	'-webkit-transition: none !important;'+
+	'-moz-transition: none !important;'+
+	'-o-transition: none !important;'+
+	'-ms-transition: none !important;'+
+	'transition: none !important;'+
+	'}';
     document.getElementsByTagName('head')[0].appendChild(style);
 
 
@@ -117,7 +116,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
         titleElement.style.cursor = 'pointer';
         titleElement.style.marginBottom = titleElement.style.marginBottom / 2;
 
-        textElement.offsetHeight;
+        textElement.offsetHeight; // Refresh height
         textElement.className = textElement.className.replace(' notransition', '');
 
         var deployed = false;
@@ -150,7 +149,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
                 prevHeight = getComputedStyle(textElement).height;
                 textElement.style.height = actualHeight;
 
-                textElement.offsetHeight;
+                textElement.offsetHeight; // Refresh height
                 textElement.className = textElement.className.replace(' notransition', '');
                 textElement.style.height = prevHeight;
                 textElement.style.margin = prevMargin;
