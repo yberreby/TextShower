@@ -42,7 +42,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     // Anchors support
 
     function anchorNav(titleElement, textElement, changeState, deployed, durationArray) {
-        if (window.location.hash.substring(1) == titleElement.id != '') {
+        if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
             textElement.className += ' notransition';
 
             if (!deployed) {
