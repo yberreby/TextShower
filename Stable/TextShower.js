@@ -1,7 +1,16 @@
+/*!
+ * TextShower - Super simple CSS and JS TextSlider
+ * (c) 2013 Yohaï Berreby <yohaiberreby@gmail.com>
+ * License: https://github.com/filsmick/TextShower/blob/master/LICENSE
+ *
+ * http://filsmick.github.io/TextShower/
+ * http://github.com/filsmick/TextShower/
+ */
+
 function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modifyTitle) {
 
     // Init
-    var timer, timer2;
+    var timer;
 
     // If an argument is not specified, use default one
     heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
@@ -158,7 +167,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
             } else {
                 deployed = false;
 
-                clearTimeout(timer), clearTimeout(timer2);
+                clearTimeout(timer);
 
 
                 if (modifyTitle) {
