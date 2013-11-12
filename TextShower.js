@@ -9,8 +9,7 @@
 
 function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modifyTitle) {
 
-    // Init
-    var timer;
+    /*jshint multistr: true */
 
     // If an argument is not specified, use default one
     heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
@@ -20,7 +19,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
     // Check for the custom meta tag and retrieve its data
-    if (document.querySelector('meta[data-TextShower]') != null) {
+    if (document.querySelector('meta[data-TextShower]') !== null) {
         var settings = document.querySelector('meta[data-TextShower]').getAttribute('data-TextShower');
         var settingsArray = settings.split(' ');
 
@@ -34,7 +33,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     // Edit the .splice() method
     String.prototype.splice = function(idx, rem, s) {
         return (this.slice(0, idx) + s + this.slice(idx + Math.abs(rem)));
-    }
+    };
 
     // Cross-browsers event handling function
 
@@ -51,7 +50,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
     // Anchors support
 
     function anchorNav(titleElement, textElement, changeState, deployed, durationArray) {
-        if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
+        if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) !== '') {
             textElement.className += ' notransition';
 
             if (!deployed) {
@@ -131,7 +130,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
         addEvent(window, 'hashchange', function() {
             anchorNav(titleElement, textElement, changeState, deployed, durationArray);
-        })
+        });
 
         anchorNav(titleElement, textElement, changeState, deployed, durationArray);
 
@@ -189,7 +188,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
         // Toggle box state on click
         addEvent(titleElement, 'click', function() {
             changeState(titleElement, textElement);
-        })
+        });
     }
 
     var boxes = document.getElementsByClassName('TextShower-box');
