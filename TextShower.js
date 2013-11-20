@@ -30,13 +30,9 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
         modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== 'none' ? (settingsArray[4] == 'true') : modifyTitle;
     }
 
-    // Edit the .splice() method
-    String.prototype.splice = function(idx, rem, s) {
-        return (this.slice(0, idx) + s + this.slice(idx + Math.abs(rem)));
-    };
-
-    function addStr(object, idx, s) {
-        return (object.slice(0, idx) + s + object.slice(idx + 0));
+    // New String object method - adds a string inside another at specified index
+    String.prototype.addStrAt = function(idx, s) {
+        return (this.slice(0, idx) + s + this.slice(idx + 0));
     };
 
     // Cross-browsers event handling function
@@ -99,7 +95,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
             textElement = box.getElementsByClassName('TextShower-text')[0];
 
         if (modifyTitle) {
-            titleElement.textContent = titleElement.textContent.splice(0, 0, "+ ");
+            titleElement.textContent = titleElement.textContent.addStrAt(0, "+ ");
         }
 
         textElement.className += ' notransition';
@@ -149,7 +145,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
                 prevHeight = getComputedStyle(textElement).height;
                 textElement.style.height = actualHeight;
 
-                textElement.offsetHeight; // Refresh height
+                textElement.offsetHeight; // Refreshes height
                 textElement.className = textElement.className.replace(' notransition', '');
                 textElement.style.height = prevHeight;
                 textElement.style.margin = prevMargin;
