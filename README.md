@@ -27,7 +27,7 @@ and embedding TextShower just before closing the \<body\> tag :
 
 You can create as many TextShower boxes as you want in your page. It will just be a little slower for each box. You can also add as many classes as you want to the elements.
 
-If you want to customize the behavior of TextShower, [it's here](http://filsmick.github.io/TextShower/#advanced-use).
+If you want to customize the behavior of TextShower, [it's here](http://filsmick.github.io/TextShower/#advanced-usage).
 
 Suggestions or issues
 ======

@@ -30,9 +30,9 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
         modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== 'none' ? (settingsArray[4] == 'true') : modifyTitle;
     }
 
-    // New String object method - adds a string inside another at specified index
-    String.prototype.addStrAt = function(idx, s) {
-        return (this.slice(0, idx) + s + this.slice(idx + 0));
+    // Edit the .splice() method
+    String.prototype.splice = function(idx, rem, s) {
+        return (this.slice(0, idx) + s + this.slice(idx + Math.abs(rem)));
     };
 
     // Cross-browsers event handling function
@@ -57,35 +57,40 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
                 changeState(titleElement, textElement);
             }
 
-            titleElement.scrollIntoView(true);
-            textElement.className = textElement.className.replace(' notransition', '');
+            setTimeout(function() {
+                titleElement.scrollIntoView(true);
+            }, 0);
+
+            setTimeout(function() {
+                textElement.className = textElement.className.replace(' notransition', '');
+            }, Math.max.apply(Math, durationArray) * 1000);
         }
     }
 
     // Add transitions rules to the page
     var style = document.createElement('style');
     style.type = 'text/css';
-    style.innerHTML = '.TextShower-title {'+
-	'-moz-user-select: none;'+
-	'-webkit-user-select: none;'+
-	'-ms-user-select:none;'+
-	'user-select:none;'+
-	'}'+
-	'.TextShower-text {'+
-	'overflow: hidden;'+
-	'-webkit-transition: height ' + heightDelay + ' ' + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-	'-moz-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-	'-o-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-	'-ms-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-	'transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-	'}'+
-	'.notransition {'+
-	'-webkit-transition: none !important;'+
-	'-moz-transition: none !important;'+
-	'-o-transition: none !important;'+
-	'-ms-transition: none !important;'+
-	'transition: none !important;'+
-	'}';
+    style.innerHTML = '.TextShower-title {\
+	-moz-user-select: none;\
+	-webkit-user-select: none;\
+	-ms-user-select:none;\
+	user-select:none;\
+	} \
+	.TextShower-text {\
+	overflow: hidden;\
+	-webkit-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-moz-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-o-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-ms-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	}\
+	.notransition {\
+	-webkit-transition: none !important;\
+	-moz-transition: none !important;\
+	-o-transition: none !important;\
+	-ms-transition: none !important;\
+	transition: none !important;\
+	}';
     document.getElementsByTagName('head')[0].appendChild(style);
 
 
@@ -95,7 +100,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
             textElement = box.getElementsByClassName('TextShower-text')[0];
 
         if (modifyTitle) {
-            titleElement.textContent = titleElement.textContent.addStrAt(0, "+ ");
+            titleElement.textContent = titleElement.textContent.splice(0, 0, "+ ");
         }
 
         textElement.className += ' notransition';
@@ -112,7 +117,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
         titleElement.style.cursor = 'pointer';
         titleElement.style.marginBottom = titleElement.style.marginBottom / 2;
 
-        textElement.offsetHeight; // Refresh height
+        textElement.offsetHeight;
         textElement.className = textElement.className.replace(' notransition', '');
 
         var deployed = false;
@@ -145,7 +150,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
                 prevHeight = getComputedStyle(textElement).height;
                 textElement.style.height = actualHeight;
 
-                textElement.offsetHeight; // Refreshes height
+                textElement.offsetHeight;
                 textElement.className = textElement.className.replace(' notransition', '');
                 textElement.style.height = prevHeight;
                 textElement.style.margin = prevMargin;
