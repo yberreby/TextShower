@@ -1,13 +1,30 @@
 /*!
- * TextShower - Super simple CSS and JS TextSlider
- * (c) 2013 Yohaï Berreby <yohaiberreby@gmail.com>
+ * TextShower - jQuery version
+ * © 2013 Yohaï Berreby <yohaiberreby@gmail.com>
  * License: https://github.com/filsmick/TextShower/blob/master/LICENSE
  *
  * http://filsmick.github.io/TextShower/
  * http://github.com/filsmick/TextShower/
  */
 
-window.Modernizr=function(a,b,c){function w(a){i.cssText=a}function x(a,b){return w(prefixes.join(a+";")+(b||""))}function y(a,b){return typeof a===b}function z(a,b){return!!~(""+a).indexOf(b)}function A(a,b){for(var d in a){var e=a[d];if(!z(e,"-")&&i[e]!==c)return b=="pfx"?e:!0}return!1}function B(a,b,d){for(var e in a){var f=b[a[e]];if(f!==c)return d===!1?a[e]:y(f,"function")?f.bind(d||b):f}return!1}function C(a,b,c){var d=a.charAt(0).toUpperCase()+a.slice(1),e=(a+" "+m.join(d+" ")+d).split(" ");return y(b,"string")||y(b,"undefined")?A(e,b):(e=(a+" "+n.join(d+" ")+d).split(" "),B(e,b,c))}var d="2.7.0",e={},f=b.documentElement,g="modernizr",h=b.createElement(g),i=h.style,j,k={}.toString,l="Webkit Moz O ms",m=l.split(" "),n=l.toLowerCase().split(" "),o={},p={},q={},r=[],s=r.slice,t,u={}.hasOwnProperty,v;!y(u,"undefined")&&!y(u.call,"undefined")?v=function(a,b){return u.call(a,b)}:v=function(a,b){return b in a&&y(a.constructor.prototype[b],"undefined")},Function.prototype.bind||(Function.prototype.bind=function(b){var c=this;if(typeof c!="function")throw new TypeError;var d=s.call(arguments,1),e=function(){if(this instanceof e){var a=function(){};a.prototype=c.prototype;var f=new a,g=c.apply(f,d.concat(s.call(arguments)));return Object(g)===g?g:f}return c.apply(b,d.concat(s.call(arguments)))};return e}),o.csstransitions=function(){return C("transition")};for(var D in o)v(o,D)&&(t=D.toLowerCase(),e[t]=o[D](),r.push((e[t]?"":"no-")+t));return e.addTest=function(a,b){if(typeof a=="object")for(var d in a)v(a,d)&&e.addTest(d,a[d]);else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof enableClasses!="undefined"&&enableClasses&&(f.className+=" "+(b?"":"no-")+a),e[a]=b}return e},w(""),h=j=null,e._version=d,e._domPrefixes=n,e._cssomPrefixes=m,e.testProp=function(a){return A([a])},e.testAllProps=C,e}(this,this.document);
+// From https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
+
+function supportsTransitions() {
+	var b = document.body || document.documentElement;
+	var s = b.style;
+	var p = 'transition';
+	if(typeof s[p] == 'string') { return true; }
+
+	// Tests for vendor specific prop
+	var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
+	p = p.charAt(0).toUpperCase() + p.substr(1);
+	for(var i=0; i < v.length; i++) {
+		if(typeof s[v[i] + p] == 'string') { return true; }
+	}
+	return false;
+}
+
+transitions = supportsTransitions();
 
 function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modifyTitle) {
 	/*jshint multistr: true */
@@ -20,7 +37,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 	modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
 	// Check for the custom meta tag and retrieve its data
-	if ($('meta[data-TextShower]') !== null) {
+	if ($('meta[data-TextShower]').length !== 0) {
 		var settings = $('meta[data-TextShower]').attr('data-TextShower');
 		var settingsArray = settings.split(' ');
 
@@ -47,37 +64,43 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 			}
 
 			titleElement.scrollIntoView(true);
-			textElement.className = textElement.className.replace(' notransition', '');
+			textElement.addClass('notransition');
 		}
 	}
 
 	// Add transitions rules to the page if CSS transitions are supported
-	if (Modernizr.csstransitions) {
-    	var style = document.createElement('style');
-    	style.type = 'text/css';
-    	style.innerHTML = '.TextShower-title {'+
-    	'-moz-user-select: none;'+
-    	'-webkit-user-select: none;'+
-    	'-ms-user-select:none;'+
-    	'user-select:none;'+
-    	'}'+
-    	'.TextShower-text {'+
-    	'overflow: hidden;'+
-    	'-webkit-transition: height ' + heightDelay + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-    	'-moz-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-    	'-o-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-    	'-ms-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-    	'transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';'+
-    	'}'+
-    	'.notransition {'+
-    	'-webkit-transition: none !important;'+
-    	'-moz-transition: none !important;'+
-    	'-o-transition: none !important;'+
-    	'-ms-transition: none !important;'+
-    	'transition: none !important;'+
-    	'}';
-    	document.getElementsByTagName('head')[0].appendChild(style);
+	if (transitions) {
+		var style = document.createElement('style'),
+		transition = 'height ' + heightDelay + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming;
+		style.type = 'text/css';
+		style.innerHTML = '.TextShower-title {'+
+		'-moz-user-select: none;'+
+		'-webkit-user-select: none;'+
+		'-ms-user-select:none;'+
+		'user-select:none;'+
+		'}'+
+		'.TextShower-text {'+
+		'overflow: hidden;'+
+		'-webkit-transition: ' + transition + ';' +
+		'-moz-transition: ' + transition + ';' +
+		'-o-transition: ' + transition + ';' +
+		'-ms-transition: ' + transition + ';' +
+		'transition: ' + transition + ';' +
+		'}'+
+		'.notransition {'+
+		'-webkit-transition: none !important;'+
+		'-moz-transition: none !important;'+
+		'-o-transition: none !important;'+
+		'-ms-transition: none !important;'+
+		'transition: none !important;'+
+		'}';
+		document.getElementsByTagName('head')[0].appendChild(style);
 	}
+
+	/-(.)/.exec(heightTiming);
+	heightTiming = heightTiming.replace(/-(.)/, RegExp.$1.toUpperCase());
+	/-(.)/.exec(marginTiming);
+	marginTiming = marginTiming.replace(/-(.)/, RegExp.$1.toUpperCase());
 
 
 	// Prepare boxes
@@ -104,6 +127,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		titleElement.css('margin-bottom', titleElement.css('margin-bottom').substring(0, -2) / 2);
 
 		textElement.css('height');
+
 		textElement.removeClass('notransition');
 
 		var deployed = false;
@@ -129,44 +153,58 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 					titleElement.text(titleElement.text().replace('+', '-'));
 				}
 
-
 				var actualHeight = textElement.css('height');
 				textElement.addClass('notransition');
 				textElement.css('height', 'auto');
-				prevHeight = textElement.height();
+				prevHeight = textElement.height() + 'px';
 				textElement.css('height', actualHeight);
 
 				textElement.height(); // Refreshes height
 				textElement.removeClass('notransition');
 
-				textElement.animate({height: prevHeight}, heightDelay, heightTiming);
-				textElement.animate({margin: prevMargin}, marginDelay, marginTiming);
-				textElement.animate({paddingTop: prevPaddingTop}, marginDelay, marginTiming);
-				textElement.animate({paddingBottom: prevPaddingBottom}, marginDelay, marginTiming);
-
-				timer = setTimeout(function transEnd() {
+				function transEnd() {
 					textElement.addClass('notransition');
 					textElement.css('height', 'auto');
-					prevHeight = textElement.css('height');
-				}, Math.max.apply(Math, durationArray) * 1000);
+					prevHeight = textElement.height() + 'px';
+				}
+
+				if (!transitions) {
+					textElement.animate({height: prevHeight}, {duration: heightDelay, easing: 'swing', queue: false, complete: transEnd});
+					textElement.animate({margin: prevMargin}, {duration: marginDelay, easing: 'linear', queue: false});
+					textElement.animate({paddingTop: prevPaddingTop}, {duration: marginDelay, easing: 'linear', queue: false});
+					textElement.animate({paddingBottom: prevPaddingBottom}, {duration: marginDelay, easing: 'linear', queue: false});
+				} else {
+					textElement.css('height', prevHeight);
+					textElement.css('margin', prevMargin);
+					textElement.css('padding-top', prevPaddingTop);
+					textElement.css('padding-bottom', prevPaddingBottom);
+
+					var timer = setTimeout(transEnd, Math.max.apply(Math, durationArray) * 1000);
+				}
 			} else {
 				deployed = false;
-
-				clearTimeout(timer);
 
 				if (modifyTitle) {
 					titleElement.text(titleElement.text().replace('-', '+'));
 				}
 
+				if (timer !== undefined) { clearTimeout(timer); }
 				prevHeight = textElement.height();
 				textElement.css('height', textElement.height() + "px");
 
 				setTimeout(function() {
 					textElement.removeClass('notransition');
-					textElement.animate({height: '0px'}, heightDelay, heightTiming);
-					textElement.animate({margin: '0 0 0 0'}, marginDelay, marginTiming);
-					textElement.animate({paddingTop: '0'}, marginDelay, marginTiming);
-					textElement.animate({paddingBottom: '0'}, marginDelay, marginTiming);
+					if (!transitions) {
+						textElement.animate({height: '0px'}, {duration: heightDelay, easing: 'swing', queue: false});
+						textElement.animate({margin: '0 0 0 0'}, {duration: marginDelay, easing: 'linear', queue: false});
+						textElement.animate({paddingTop: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
+						textElement.animate({paddingBottom: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
+					} else {
+						textElement.css('height', '0px');
+						textElement.css('margin', '0 0 0 0');
+						textElement.css('padding-top', '0');
+						textElement.css('padding-bottom', '0');
+					}
 				}, 0);
 			}
 		}
@@ -187,51 +225,3 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 // Edit the arguments of this function to customize the global script behavior
 // Can be overwritten by the custom meta tag
 TextShower('0.8s', '0.3s', 'ease', 'linear', true);
-
-$(function(){
-        function getPrefix( prop ){
-        var prefixes = ['Moz','Webkit','Khtml','0','ms'],
-            elem     = document.createElement('div'),
-            upper      = prop.charAt(0).toUpperCase() + prop.slice(1),
-            pref     = "";
-        for(var len = prefixes.length; len--;){
-            if((prefixes[len] + upper) in elem.style){
-                pref = (prefixes[len]);
-            }
-        }
-        if(prop in elem.style){
-            pref = (prop);
-        }
-        return '-' + pref.toLowerCase() + '-';
-        }
-        $.fn.extend({
-            defaultAnimate: $.fn.animate,
-            animate: function(props, speed, easing, callback) {
-                        var options = speed && typeof speed === "object" ? jQuery.extend({}, speed) :{
-                                complete: callback || !callback && easing ||
-                                jQuery.isFunction( speed ) && speed,
-                                duration: speed,
-                                easing: callback && easing || easing && !jQuery.isFunction(easing) && easing
-                            };
-                          return $(this).each(function() {
-                            var $this = $(this),
-                                altTransition,
-                                easing = (options.easing) ? easing : 'ease-in-out',
-                                prefix = (getPrefix('transition'));
-                                if (Modernizr.csstransitions)
-                                {
-                                      $this.css(prefix + 'transition', 'all ' + speed / 1000 + 's ease-in-out').css(props);
-                                      setTimeout(function() {
-                                        $this.css(prefix + 'transition', altTransition);
-                                        if ($.isFunction(options.complete)) {
-                                             options.complete();
-                                        }
-                                      }, speed);
-                                }
-                                else{
-                                     $this.defaultAnimate(props, options);
-                                }
-                        });
-                    }
-        });
-});
