@@ -2,10 +2,7 @@ Presentation
 ======
 ![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-green.png)
 
-Tired of the heavy scripts for everything? Don't want to overload your server and the client with
-tons of useless code for just a text slider? So you'll like TextShower.
-
-TextShower is a flexible solution
+TextShower is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
 
 <a href="http://filsmick.github.io/TextShower/">Presentation, instructions and examples</a>
 
