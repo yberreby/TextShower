@@ -58,27 +58,29 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		var style = document.createElement('style'),
 		transition = 'height ' + heightDelay + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming;
 		style.type = 'text/css';
-		style.innerHTML = '.TextShower-title {'+
-		'-moz-user-select: none;'+
-		'-webkit-user-select: none;'+
-		'-ms-user-select:none;'+
-		'user-select:none;'+
-		'}'+
-		'.TextShower-text {'+
-		'overflow: hidden;'+
-		'-webkit-transition: ' + transition + ';' +
-		'-moz-transition: ' + transition + ';' +
-		'-o-transition: ' + transition + ';' +
-		'-ms-transition: ' + transition + ';' +
-		'transition: ' + transition + ';' +
-		'}'+
-		'.notransition {'+
-		'-webkit-transition: none !important;'+
-		'-moz-transition: none !important;'+
-		'-o-transition: none !important;'+
-		'-ms-transition: none !important;'+
-		'transition: none !important;'+
-		'}';
+		style.innerHTML =
+			'.TextShower-title {'+
+				'-moz-user-select: none;'+
+				'-webkit-user-select: none;'+
+				'-ms-user-select:none;'+
+				'user-select:none;'+
+				'cursor: pointer;'+
+			'}'+
+			'.TextShower-text {'+
+				'overflow: hidden;'+
+				'-webkit-transition: ' + transition + ';' +
+				'-moz-transition: ' + transition + ';' +
+				'-o-transition: ' + transition + ';' +
+				'-ms-transition: ' + transition + ';' +
+				'transition: ' + transition + ';' +
+			'}'+
+			'.notransition {'+
+				'-webkit-transition: none !important;'+
+				'-moz-transition: none !important;'+
+				'-o-transition: none !important;'+
+				'-ms-transition: none !important;'+
+				'transition: none !important;'+
+			'}';
 		document.getElementsByTagName('head')[0].appendChild(style);
 	}
 
@@ -111,18 +113,15 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		textElement.addClass('notransition');
 
 		var prevHeight = textElement.css('height');
-		var prevMargin = textElement.css('margin');
-		var prevPaddingTop = textElement.css('paddingTop');
-		var prevPaddingBottom = textElement.css('paddingBottom');
+		prevMargin = textElement.css('margin');
+		prevPaddingTop = textElement.css('paddingTop');
+		prevPaddingBottom = textElement.css('paddingBottom');
 		textElement.css('height', '0px');
 		textElement.css('margin', '0 0 0 0');
 		textElement.css('padding-top', '0');
 		textElement.css('padding-bottom', '0');
 
-		titleElement.css('cursor', 'pointer');
 		titleElement.css('margin-bottom', titleElement.css('margin-bottom').substring(0, -2) / 2);
-
-		textElement.css('height');
 
 		textElement.removeClass('notransition');
 
@@ -157,7 +156,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 					prevHeight = textElement.height() + 'px';
 					textElement.css('height', actualHeight);
 
-					textElement.height(); // Refreshes height
 					textElement.removeClass('notransition');
 
 					function transEnd() {
