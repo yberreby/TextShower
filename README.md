@@ -1,6 +1,6 @@
 Presentation
 ======
-[![Flattr this!](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=filsmick&url=github.com/TextShower&title=TextShower&language=&tags=github&category=software)
+![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-green.png)
 
 Tired of the heavy scripts for everything? Don't want to overload your server and the client with
 tons of useless code for just a text slider? So you'll like TextShower.
@@ -41,3 +41,5 @@ You like TextShower ?
 =====
 
 If you want to support TextShower, you can flattr me with the button at the top of the page. It will help me to develop TextShower and to create more cool things!
+
+[![Flattr this!](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=filsmick&url=github.com/TextShower&title=TextShower&language=&tags=github&category=software)
