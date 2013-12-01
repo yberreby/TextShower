@@ -10,15 +10,20 @@
 // From https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
 
 function supportsTransitions() {
-	var b = document.body || document.documentElement;
-	var s = b.style;
-	var p = 'transition';
-	if(typeof s[p] == 'string') { return true; }
+	var b = document.body || document.documentElement,
+		s = b.style,
+		p = 'transition';
+
+	if (typeof s[p] == 'string') { return true; }
 
 	// Tests for vendor specific prop
-	var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
+	var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'],
+		vLength = v.length,
+		i;
 	p = p.charAt(0).toUpperCase() + p.substr(1);
-	for(var i=0; i < v.length; i++) {
+
+
+	for (i=0; i < vLength; i++) {
 		if(typeof s[v[i] + p] == 'string') { return true; }
 	}
 	return false;
@@ -26,14 +31,15 @@ function supportsTransitions() {
 
 transitions = supportsTransitions();
 
-function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modifyTitle) {
+function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	/*jshint multistr: true */
+
+	marginTiming = 'ease-out';
 
 	// If an argument is not specified, use default one
 	heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
 	marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
 	heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
-	marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
 	modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
 	// Check for the custom meta tag and retrieve its data
@@ -44,8 +50,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		heightDelay = typeof settingsArray[0] !== 'undefined' && settingsArray[0] !== 'none' ? settingsArray[0] : heightDelay;
 		marginDelay = typeof settingsArray[1] !== 'undefined' && settingsArray[1] !== 'none' ? settingsArray[1] : marginDelay;
 		heightTiming = typeof settingsArray[2] !== 'undefined' && settingsArray[2] !== 'none' ? settingsArray[2] : heightTiming;
-		marginTiming = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== 'none' ? settingsArray[3] : marginTiming;
-		modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== 'none' ? (settingsArray[4] == 'true') : modifyTitle;
+		modifyTitle = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== 'none' ? (settingsArray[3] == 'true') : modifyTitle;
 	}
 
 	// New String object method - adds a string inside another at specified index
@@ -56,7 +61,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 	// Add transitions rules to the page if CSS transitions are supported
 	if (transitions) {
 		var style = document.createElement('style'),
-		transition = 'height ' + heightDelay + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming;
+		transition = 'height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming;
 		style.type = 'text/css';
 		style.innerHTML =
 			'.TextShower-title {'+
@@ -94,12 +99,78 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 		if (window.location.hash.substring(1) == titleElement.attr('id') && window.location.hash.substring(1) !== '') {
 			textElement.addClass('notransition');
 
-			openBox(titleElement, textElement);
-			titleElement.scrollIntoView(true);
+			openBox(titleElement, textElement, durationArray);
+			titleElement[0].scrollIntoView(true);
 
 			textElement.removeClass('notransition');
 		}
 	}
+
+	var timer, deployed = false;
+
+	function openBox(titleElement, textElement, durationArray) {
+		deployed = true;
+
+		if (modifyTitle) {
+			titleElement.text(titleElement.text().replace('+', '-'));
+		}
+
+		var actualHeight = textElement.css('height');
+		textElement.addClass('notransition');
+		textElement.css('height', 'auto');
+		prevHeight = textElement.height() + 'px';
+		textElement.css('height', actualHeight);
+
+		textElement.removeClass('notransition');
+
+		function transEnd() {
+			textElement.addClass('notransition');
+			textElement.css('height', 'auto');
+			prevHeight = textElement.height() + 'px';
+		}
+
+		if (!transitions) {
+			textElement.animate({height: prevHeight}, {duration: heightDelay, easing: 'swing', queue: false, complete: transEnd});
+			textElement.animate({margin: prevMargin}, {duration: marginDelay, easing: 'linear', queue: false});
+			textElement.animate({paddingTop: prevPaddingTop}, {duration: marginDelay, easing: 'linear', queue: false});
+			textElement.animate({paddingBottom: prevPaddingBottom}, {duration: marginDelay, easing: 'linear', queue: false});
+		} else {
+			textElement.css('height', prevHeight);
+			textElement.css('margin', prevMargin);
+			textElement.css('padding-top', prevPaddingTop);
+			textElement.css('padding-bottom', prevPaddingBottom);
+
+			timer = setTimeout(transEnd, Math.max.apply(Math, durationArray) * 1000);
+		}
+	}
+
+	function closeBox(titleElement, textElement) {
+		deployed = false;
+
+		if (modifyTitle) {
+			titleElement.text(titleElement.text().replace('-', '+'));
+		}
+
+		if (timer !== undefined) { clearTimeout(timer); }
+		prevHeight = textElement.height();
+		textElement.css('height', textElement.height() + "px");
+
+		setTimeout(function() {
+			textElement.removeClass('notransition');
+			if (!transitions) {
+				textElement.animate({height: '0px'}, {duration: heightDelay, easing: 'swing', queue: false});
+				textElement.animate({margin: '0 0 0 0'}, {duration: marginDelay, easing: 'linear', queue: false});
+				textElement.animate({paddingTop: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
+				textElement.animate({paddingBottom: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
+			} else {
+				textElement.css('height', '0px');
+				textElement.css('margin', '0 0 0 0');
+				textElement.css('padding-top', '0');
+				textElement.css('padding-bottom', '0');
+			}
+		}, 0);
+	}
+
 
 	// Prepare boxes
 	function prepareBox(box) {
@@ -125,8 +196,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 		textElement.removeClass('notransition');
 
-		var deployed = false;
-
 		var durationArray = [],
 			pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g)),
 			pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
@@ -141,71 +210,9 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 		// Toggle box state
 		function changeState(titleElement, textElement) {
-			var timer;
 			if (!deployed) {
-				function openBox(titleElement, textElement) {
-					deployed = true;
-
-					if (modifyTitle) {
-						titleElement.text(titleElement.text().replace('+', '-'));
-					}
-
-					var actualHeight = textElement.css('height');
-					textElement.addClass('notransition');
-					textElement.css('height', 'auto');
-					prevHeight = textElement.height() + 'px';
-					textElement.css('height', actualHeight);
-
-					textElement.removeClass('notransition');
-
-					function transEnd() {
-						textElement.addClass('notransition');
-						textElement.css('height', 'auto');
-						prevHeight = textElement.height() + 'px';
-					}
-
-					if (!transitions) {
-						textElement.animate({height: prevHeight}, {duration: heightDelay, easing: 'swing', queue: false, complete: transEnd});
-						textElement.animate({margin: prevMargin}, {duration: marginDelay, easing: 'linear', queue: false});
-						textElement.animate({paddingTop: prevPaddingTop}, {duration: marginDelay, easing: 'linear', queue: false});
-						textElement.animate({paddingBottom: prevPaddingBottom}, {duration: marginDelay, easing: 'linear', queue: false});
-					} else {
-						textElement.css('height', prevHeight);
-						textElement.css('margin', prevMargin);
-						textElement.css('padding-top', prevPaddingTop);
-						textElement.css('padding-bottom', prevPaddingBottom);
-
-						timer = setTimeout(transEnd, Math.max.apply(Math, durationArray) * 1000);
-					}
-				}
-				openBox(titleElement, textElement);
+				openBox(titleElement, textElement, durationArray);
 			} else {
-				function closeBox(titleElement, textElement) {
-					deployed = false;
-
-					if (modifyTitle) {
-						titleElement.text(titleElement.text().replace('-', '+'));
-					}
-
-					if (timer !== undefined) { clearTimeout(timer); }
-					prevHeight = textElement.height();
-					textElement.css('height', textElement.height() + "px");
-
-					setTimeout(function() {
-						textElement.removeClass('notransition');
-						if (!transitions) {
-							textElement.animate({height: '0px'}, {duration: heightDelay, easing: 'swing', queue: false});
-							textElement.animate({margin: '0 0 0 0'}, {duration: marginDelay, easing: 'linear', queue: false});
-							textElement.animate({paddingTop: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
-							textElement.animate({paddingBottom: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
-						} else {
-							textElement.css('height', '0px');
-							textElement.css('margin', '0 0 0 0');
-							textElement.css('padding-top', '0');
-							textElement.css('padding-bottom', '0');
-						}
-					}, 0);
-				}
 				closeBox(titleElement, textElement);
 			}
 		}
@@ -225,4 +232,4 @@ function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modify
 
 // Edit the arguments of this function to customize the global script behavior
 // Can be overwritten by the custom meta tag
-TextShower('0.8s', '0.3s', 'ease', 'linear', true);
+TextShower('0.8s', '0.3s', 'ease', true);
