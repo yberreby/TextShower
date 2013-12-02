@@ -8,7 +8,6 @@
  */
 
 // From https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
-
 function supportsTransitions() {
 	var b = document.body || document.documentElement,
 		s = b.style,
@@ -23,8 +22,8 @@ function supportsTransitions() {
 	p = p.charAt(0).toUpperCase() + p.substr(1);
 
 
-	for (i=0; i < vLength; i++) {
-		if(typeof s[v[i] + p] == 'string') { return true; }
+	for (i = 0; i < vLength; i++) {
+		if (typeof s[v[i] + p] == 'string') { return true; }
 	}
 	return false;
 }
@@ -217,7 +216,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 			}
 		}
 
-		// Toggle box state on click
 		$(titleElement).click(function() {
 			changeState(titleElement, textElement);
 		});
