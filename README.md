@@ -61,7 +61,7 @@ And now, your pages have different transitions and everyone is happy.
 
 ## And if I want more?
 
-Well, feel free to edit the code. You can easily add features to TextShower to meet your needs because its code is clear, clean and commented. This is why I said TextShower wan *flexible*.
+Well, feel free to edit the code. You can easily add features to TextShower to meet your needs because its code is clear, clean and commented.  This is why I said TextShower is *flexible*.
 
 Suggestions or issues
 ======
