@@ -31,8 +31,6 @@ function supportsTransitions() {
 transitions = supportsTransitions();
 
 function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
-	/*jshint multistr: true */
-
 	marginTiming = 'ease-out';
 
 	// If an argument is not specified, use default one
