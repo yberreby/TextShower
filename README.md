@@ -18,7 +18,7 @@ You can simply start by uploading TextShower.js or TextShower.min.js to your FTP
 </div>
 ```
 
-and embedding TextShower just before closing the \<body\> tag :
+and embedding TextShower just before closing the `<body>` tag :
 
 ``` html
 <script src="path/to/TextShower.js"></script>
@@ -31,12 +31,7 @@ If you want to customize the behavior of TextShower, [it's here](http://filsmick
 Suggestions or issues
 ======
 
-[Open an issue](https://github.com/filsmick/TextShower/issues) for any problem or suggestion.
+TextShower is in an early stage. Please [open an issue](https://github.com/filsmick/TextShower/issues) if you have any problem or suggestion.
 
-
-You like TextShower ?
-=====
-
-If you want to support TextShower, you can flattr me with the button at the top of the page. It will help me to develop TextShower and to create more cool things!
 
 [![Flattr this!](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=filsmick&url=github.com/TextShower&title=TextShower&language=&tags=github&category=software)
