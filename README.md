@@ -1,10 +1,12 @@
 Presentation
 ======
-![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-green.png)
+![Status WIP](http://b.repl.ca/v1/Status-WIP-yellowgreen.png)
 
 TextShower is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
 
-<a href="http://filsmick.github.io/TextShower/">Presentation, instructions and examples</a>
+Downloads:  
+![Developement (8 Ko)](http://filsmick.github.io/javascripts/TextShower.js)  
+![Minified (4 Ko)](http://filsmick.github.io/javascripts/TextShower.min.js)
 
 How to use
 ======
@@ -33,18 +35,23 @@ Yup, you're done.
 
 You are no satisfied? You want to have another timing? Another transition? Well, we'll do that.
 
-Do everything like in the "Simple solution", excepted the embed. Don't load the script from GitHub servers. Instead, download TextShower.js or TextShower.min.js (the latter is the lighter) and upload it on your FTP server. Then open it in a text editor and edit the last line of the code:
+Do everything like in the "Simple solution", excepted the embed. Don't load the script from GitHub servers. Instead, download TextShower.js or TextShower.min.js (the latter is the lighter), upload it on your FTP server then embed it as previously, but with your own path:  
+```html
+<script src="/path/to/TextShower.min.js"></script>
+```
+Now, open the .js file in a text editor and edit the last line of the code:
 
 ``` javascript
 TextShower('0.8s', '0.3s', 'ease', true);
 ```
 
-This function is what you want to edit. Here are its arguments:
+This function is what we want to edit. Here are its arguments:
 
 ```javascript
 TextShower([height transition duration], [margin transition duration], [timing function], [should add a dynamic '+' to the box title? true/false])
 ```
 Simply replace the default values by what you want, save and you changes will be reflected sitewide.
+
 
 ### Page by page settings
 

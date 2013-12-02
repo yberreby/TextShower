@@ -24,7 +24,6 @@ p = p.charAt(0).toUpperCase() + p.substr(1);
 for (i = 0; i < vLength; i++) {
 	if (typeof s[v[i] + p] == 'string') { transitions = true; }
 }
-transitions = false;
 
 function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	marginTiming = 'ease-out';
@@ -92,7 +91,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		if (window.location.hash.substring(1) == titleElement.attr('id') && window.location.hash.substring(1) !== '') {
 			textElement.addClass('notransition');
 
-			openBox(titleElement, textElement, durationArray);
+			changeState(titleElement, textElement, false);
 			titleElement[0].scrollIntoView(true);
 
 			textElement.removeClass('notransition');
@@ -100,79 +99,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	}
 
 	var timer, deployed = false;
-
-	function openBox(titleElement, textElement, durationArray) {
-		deployed = true;
-
-		if (modifyTitle) {
-			titleElement.text(titleElement.text().replace('+', '-'));
-		}
-
-		var actualHeight = textElement.css('height');
-		textElement.addClass('notransition');
-
-		textElement.css('height', 'auto');
-		prevHeight = textElement.height() + 'px';
-		textElement.css('height', actualHeight);
-		// Here comes the code you want to be run WITHOUT TRANSITION when the box is opened
-
-		textElement.removeClass('notransition');
-
-		function transEnd() {
-			textElement.addClass('notransition');
-			textElement.css('height', 'auto');
-			prevHeight = textElement.height() + 'px';
-		}
-
-		if (!transitions) {
-			textElement.animate({height: prevHeight}, {duration: heightDelay, easing: 'swing', queue: false, complete: transEnd});
-			textElement.animate({margin: prevMargin}, {duration: marginDelay, easing: 'linear', queue: false});
-			textElement.animate({paddingTop: prevPaddingTop}, {duration: marginDelay, easing: 'linear', queue: false});
-			textElement.animate({paddingBottom: prevPaddingBottom}, {duration: marginDelay, easing: 'linear', queue: false});
-			// Add some jQuery animations here
-		} else {
-			textElement.css('height', prevHeight);
-			textElement.css('margin', prevMargin);
-			textElement.css('padding-top', prevPaddingTop);
-			textElement.css('padding-bottom', prevPaddingBottom);
-			// Add code to be run with CSS transitions here
-
-			timer = setTimeout(transEnd, Math.max.apply(Math, durationArray) * 1000);
-		}
-	}
-
-	function closeBox(titleElement, textElement) {
-		deployed = false;
-
-		if (modifyTitle) {
-			titleElement.text(titleElement.text().replace('-', '+'));
-		}
-
-		if (timer !== undefined) { clearTimeout(timer); }
-		prevHeight = textElement.height();
-		textElement.css('height', textElement.height() + "px");
-
-		// Here code will be run without transitions when the box is closed
-
-		setTimeout(function() {
-			// And, well, also here
-			textElement.removeClass('notransition');
-			if (!transitions) {
-				textElement.animate({height: '0px'}, {duration: heightDelay, easing: 'swing', queue: false});
-				textElement.animate({margin: '0 0 0 0'}, {duration: marginDelay, easing: 'linear', queue: false});
-				textElement.animate({paddingTop: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
-				textElement.animate({paddingBottom: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
-				// Add some jQuery animations here
-			} else {
-				textElement.css('height', '0px');
-				textElement.css('margin', '0 0 0 0');
-				textElement.css('padding-top', '0');
-				textElement.css('padding-bottom', '0');
-				// Add code to be run with CSS transitions here
-			}
-		}, 0);
-	}
-
 
 	// Prepare boxes
 	function prepareBox(box) {
@@ -211,11 +137,75 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		anchorNav(titleElement, textElement, changeState, deployed, durationArray);
 
 		// Toggle box state
-		function changeState(titleElement, textElement) {
+		function changeState(titleElement, textElement, deployed) {
 			if (!deployed) {
-				openBox(titleElement, textElement, durationArray);
+				deployed = true;
+
+				if (modifyTitle) {
+					titleElement.text(titleElement.text().replace('+', '-'));
+				}
+
+				var actualHeight = textElement.css('height');
+				textElement.addClass('notransition');
+
+				textElement.css('height', 'auto');
+				prevHeight = textElement.height() + 'px';
+				textElement.css('height', actualHeight);
+				// Here comes the code you want to be run WITHOUT TRANSITION when the box is opened
+
+				textElement.removeClass('notransition');
+
+				function transEnd() {
+					textElement.addClass('notransition');
+					textElement.css('height', 'auto');
+					prevHeight = textElement.height() + 'px';
+				}
+
+				if (!transitions) {
+					textElement.animate({height: prevHeight}, {duration: heightDelay, easing: 'swing', queue: false, complete: transEnd});
+					textElement.animate({margin: prevMargin}, {duration: marginDelay, easing: 'linear', queue: false});
+					textElement.animate({paddingTop: prevPaddingTop}, {duration: marginDelay, easing: 'linear', queue: false});
+					textElement.animate({paddingBottom: prevPaddingBottom}, {duration: marginDelay, easing: 'linear', queue: false});
+					// Add some jQuery animations here
+				} else {
+					textElement.css('height', prevHeight);
+					textElement.css('margin', prevMargin);
+					textElement.css('padding-top', prevPaddingTop);
+					textElement.css('padding-bottom', prevPaddingBottom);
+					// Add code to be run with CSS transitions here
+
+					timer = setTimeout(transEnd, Math.max.apply(Math, durationArray) * 1000);
+				}
 			} else {
-				closeBox(titleElement, textElement);
+				deployed = false;
+
+				if (modifyTitle) {
+					titleElement.text(titleElement.text().replace('-', '+'));
+				}
+
+				if (timer !== undefined) { clearTimeout(timer); }
+				prevHeight = textElement.height();
+				textElement.css('height', textElement.height() + "px");
+
+				// Here code will be run without transitions when the box is closed
+
+				setTimeout(function() {
+					// And, well, also here
+					textElement.removeClass('notransition');
+					if (!transitions) {
+						textElement.animate({height: '0px'}, {duration: heightDelay, easing: 'swing', queue: false});
+						textElement.animate({margin: '0 0 0 0'}, {duration: marginDelay, easing: 'linear', queue: false});
+						textElement.animate({paddingTop: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
+						textElement.animate({paddingBottom: '0'}, {duration: marginDelay, easing: 'linear', queue: false});
+						// Add some jQuery animations here
+					} else {
+						textElement.css('height', '0px');
+						textElement.css('margin', '0 0 0 0');
+						textElement.css('padding-top', '0');
+						textElement.css('padding-bottom', '0');
+						// Add code to be run with CSS transitions here
+					}
+				}, 0);
 			}
 		}
 
