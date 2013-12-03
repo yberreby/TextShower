@@ -5,8 +5,8 @@ Presentation
 TextShower is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
 
 Downloads:  
-![Developement (8 Ko)](http://filsmick.github.io/javascripts/TextShower.js)  
-![Minified (4 Ko)](http://filsmick.github.io/javascripts/TextShower.min.js)
+[Developement (8 Ko)](http://filsmick.github.io/javascripts/TextShower.js)  
+[Minified (4 Ko)](http://filsmick.github.io/javascripts/TextShower.min.js)
 
 How to use
 ======
