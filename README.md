@@ -1,5 +1,5 @@
 Presentation
-======
+====
 [![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-yellowgreen.png)](https://github.com/filsmick/TextShower/releases/tag/v1.0.0)
 
 **TextShower** is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
@@ -9,7 +9,7 @@ Downloads:
 - [Minified (4 Ko)](http://filsmick.github.io/javascripts/TextShower.min.js)
 
 How to use
-======
+====
 
 There is two ways to use TextShower. One is for those who don't care about animation settings and just want to get the work done, and one is for those who want a fully-customized behavior. Let's start with the simplest.
 
@@ -73,7 +73,7 @@ And now, your pages have different transitions and everyone is happy.
 Well, feel free to edit the code. You can easily add features to TextShower to meet your needs because its code is clear, clean and commented.  This is why I said TextShower is *flexible*.
 
 Browsers support
-======
+====
 
 The answer is... it depends. TextShower should support everything that jQuery support. If you use jQuery 1.10.3 - 1.9, everything should work fine even in old IE. If you have jQuery 2.X embedded instead, you will miss all the poor Internet Explorer users.
 
@@ -88,12 +88,17 @@ So if you have any bug in one of these browsers:
 It is a real issue and should be [reported](https://github.com/filsmick/TextShower/issues/new) along with the error you encountered.
 
 Suggestions or issues
-======
+====
 
 TextShower is in an early stage, so you may encounter issues. Please [open an issue](https://github.com/filsmick/TextShower/issues) if that happens or if you have a suggestion.
 
+
+Credits
+====
+
+
 License
-=====
+====
 
 Copyright © 2013 Yohaï Berreby
 
@@ -114,5 +119,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
 SOFTWARE. YOU CANNOT SUBLICENSE AND/OR SELL COPIES OF THIS SOFTWARE WITHOUT  
 THE EXPRESS PERMISSION TO DO SO.
-
-[![Flattr this!](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=filsmick&url=github.com/TextShower&title=TextShower&language=&tags=github&category=software)
