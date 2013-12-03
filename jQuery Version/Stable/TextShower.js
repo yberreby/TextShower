@@ -24,6 +24,9 @@ for (i = 0; i < vLength; i++) {
 	if (typeof s[v[i] + p] == 'string') { transitions = true; }
 }
 
+// transitions = false;
+// Uncomment the line above to use jQuery transitions instead of CSS ones
+
 function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	marginTiming = 'ease-out';
 
@@ -35,8 +38,8 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 
 	// Check for the custom meta tag and retrieve its data
 	if ($('meta[data-TextShower]').length !== 0) {
-		var settings = $('meta[data-TextShower]').attr('data-TextShower');
-		var settingsArray = settings.split(' ');
+		var settings = $('meta[data-TextShower]').attr('data-TextShower'),
+			settingsArray = settings.split(' ');
 
 		heightDelay = typeof settingsArray[0] !== 'undefined' && settingsArray[0] !== 'default' ? settingsArray[0] : heightDelay;
 		marginDelay = typeof settingsArray[1] !== 'undefined' && settingsArray[1] !== 'default' ? settingsArray[1] : marginDelay;
