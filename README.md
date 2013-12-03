@@ -15,6 +15,8 @@ There is two ways to use TextShower. One is for those who don't care about anima
 
 ## The simple solution
 
+Firstly, ensure jQuery is embedded in your page. If it is not
+
 Add the following code to your page:
 ``` html
 <div class="TextShower-box"> 
@@ -70,10 +72,47 @@ And now, your pages have different transitions and everyone is happy.
 
 Well, feel free to edit the code. You can easily add features to TextShower to meet your needs because its code is clear, clean and commented.  This is why I said TextShower is *flexible*.
 
+Browsers support
+======
+
+The answer is... it depends. TextShower should support everything that jQuery support. If you use jQuery 1.10.3 - 1.9, everything should work fine even in old IE. If you have jQuery 2.X embedded instead, you will miss all the poor Internet Explorer users.
+
+So if you have any bug in one of these browsers:  
+
+* Firefox 2.0+
+* Internet Explorer 6+
+* Safari 3+
+* Opera 10.6+
+* Chrome 8+ 
+
+It is a real issue and should be [reported](https://github.com/filsmick/TextShower/issues/new) along with the error you encountered.
+
 Suggestions or issues
 ======
 
 TextShower is in an early stage, so you may encounter issues. Please [open an issue](https://github.com/filsmick/TextShower/issues) if that happens or if you have a suggestion.
 
+License
+=====
+
+Copyright © 2013 Yohaï Berreby
+
+Permission is hereby granted, free of charge, to any person obtaining a copy  
+of this software and associated documentation files (the "Software"), to deal  
+in the Software without limitation the rights to use, copy, modify, merge, publish  
+and distribute, and to permit persons to whom the Software is furnished to do so,  
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all  
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
+SOFTWARE. YOU CANNOT SUBLICENSE AND/OR SELL COPIES OF THIS SOFTWARE WITHOUT  
+THE EXPRESS PERMISSION TO DO SO.
 
 [![Flattr this!](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=filsmick&url=github.com/TextShower&title=TextShower&language=&tags=github&category=software)
