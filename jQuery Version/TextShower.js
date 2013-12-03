@@ -24,7 +24,7 @@ for (i = 0; i < vLength; i++) {
 	if (typeof s[v[i] + p] == 'string') { transitions = true; }
 }
 
-// transitions = true;
+// transitions = false;
 // Uncomment the line above to use jQuery transitions instead of CSS ones
 
 function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
