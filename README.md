@@ -1,12 +1,12 @@
 Presentation
 ======
-![Status WIP](http://b.repl.ca/v1/Status-WIP-yellowgreen.png)
+![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-yellowgreen.png)
 
 TextShower is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
 
 Downloads:  
-[Developement (8 Ko)](http://filsmick.github.io/javascripts/TextShower.js)  
-[Minified (4 Ko)](http://filsmick.github.io/javascripts/TextShower.min.js)
+- [Developement (8 Ko)](http://filsmick.github.io/javascripts/TextShower.js)  
+- [Minified (4 Ko)](http://filsmick.github.io/javascripts/TextShower.min.js)
 
 How to use
 ======
