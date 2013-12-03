@@ -47,7 +47,7 @@ TextShower('0.8s', '0.3s', 'ease', true);
 
 This function is what we want to edit. Here are its arguments:
 
-```javascript
+```
 TextShower([height transition duration], [margin transition duration], [timing function], [should add a dynamic '+' to the box title? true/false])
 ```
 Simply replace the default values by what you want, save and you changes will be reflected sitewide.
