@@ -1,6 +1,6 @@
 Presentation
 ======
-![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-yellowgreen.png)
+[![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-yellowgreen.png)](https://github.com/filsmick/TextShower/releases/tag/v1.0.0)
 
 TextShower is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
 
