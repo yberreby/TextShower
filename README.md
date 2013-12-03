@@ -4,7 +4,7 @@ Presentation
 
 **TextShower** is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
 
-You need jQuery 1.8 or above for TextShower to work.
+Requirements: jQuery 1.8+ (1.10.2 is recommended for better browser support)
 
 Downloads:  
 - [Developement (8 Ko)](http://filsmick.github.io/javascripts/TextShower.js)  
@@ -77,9 +77,9 @@ Well, feel free to edit the code. You can easily add features to TextShower to m
 Browsers support
 ====
 
-TextShower should support everything that jQuery support. Everything should work fine with jQuery 1.8+, even in old IE. If you have jQuery 2.X embedded instead, you will miss all these poor Internet Explorer 8 and lower users.
+TextShower should support everything that jQuery support. Everything should work fine with jQuery 1.8+, even in old IE. If you have jQuery 2.x embedded instead, you will miss all these poor Internet Explorer 8 and lower users.
 
-So if you have any bug in one of these browsers:  
+So if you have any bug in one of these browsers:
 
 * Firefox 2.0+
 * Internet Explorer 6+
@@ -97,6 +97,8 @@ TextShower is in an early stage, so you may encounter issues. Please [open an is
 
 Credits
 ====
+
+Made by @filsmick with Sublime Text 2.
 
 
 License
