@@ -75,7 +75,7 @@ Well, feel free to edit the code. You can easily add features to TextShower to m
 Browsers support
 ====
 
-The answer is... it depends. TextShower should support everything that jQuery support. If you use jQuery 1.10.3 - 1.9, everything should work fine even in old IE. If you have jQuery 2.X embedded instead, you will miss all the poor Internet Explorer users.
+TextShower should support everything that jQuery support. If you use jQuery 1.10.3 - 1.9, everything should work fine even in old IE. If you have jQuery 2.X embedded instead, you will miss all the poor Internet Explorer users.
 
 So if you have any bug in one of these browsers:  
 
