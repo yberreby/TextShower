@@ -4,7 +4,7 @@ Presentation
 
 **TextShower** is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
 
-Requirements: jQuery 1.8+ (1.10.2 is recommended for better browser support)
+Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
 Downloads:  
 - [Developement (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.0/TextShower.js)  
