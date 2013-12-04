@@ -89,16 +89,11 @@ So if you have any bug in one of these browsers:
 
 It is a real issue and should be [reported](https://github.com/filsmick/TextShower/issues/new) along with the error you encountered.
 
-Suggestions or issues
-====
-
-TextShower is in an early stage, so you may encounter issues. Please [open an issue](https://github.com/filsmick/TextShower/issues) if that happens or if you have a suggestion.
-
 
 Credits
 ====
 
-Made by @filsmick with Sublime Text 2.
+Made by [@filsmick](github.com/filsmick/) with Sublime Text 2.
 
 
 License
