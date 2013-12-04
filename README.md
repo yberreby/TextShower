@@ -7,8 +7,8 @@ Presentation
 Requirements: jQuery 1.8+ (1.10.2 is recommended for better browser support)
 
 Downloads:  
-- [Developement (8 Ko)](http://filsmick.github.io/javascripts/TextShower.js)  
-- [Minified (4 Ko)](http://filsmick.github.io/javascripts/TextShower.min.js)
+- [Developement (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.0/TextShower.js)  
+- [Minified (4 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.0/TextShower.min.js)
 
 How to use
 ====
