@@ -1,10 +1,7 @@
 /*!
- * TextShower - jQuery version
+ * TextShower v1.0.1 - jQuery version
  * © 2013 Yohaï Berreby <yohaiberreby@gmail.com>
- * License: https://github.com/filsmick/TextShower/blob/master/LICENSE
- *
- * http://filsmick.github.io/TextShower/
- * http://github.com/filsmick/TextShower/
+ * See http://github.com/filsmick/TextShower/ for license and instructions
  */
 
 // From https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
@@ -236,7 +233,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	};
 
 	var boxes = $('.TextShower-box'),
-	boxesLength = boxes.length;
+		boxesLength = boxes.length;
 
 	for (var i = 0; i < boxesLength; i++) {
 		new TextShowerBox(boxes[i]);
