@@ -2,7 +2,13 @@ Presentation
 ====
 [![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-yellowgreen.png)](https://github.com/filsmick/TextShower/releases/tag/v1.0.0)
 
-**TextShower** is probably the simplest flexible solution for creating text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
+Ever wanted a simple and customisable text slider that allows you to fold / unfold text on click, with animations and custom behavior? I think you found the right place.
+
+**TextShower** is probably the simplest flexible solution to create text sliders. You can either create sliders with a plug'n'play solution or customize settings page-to-page.
+
+It is **not** a slideshow with arrows and images but a *text slider*.
+
+Example coming soon.
 
 Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
