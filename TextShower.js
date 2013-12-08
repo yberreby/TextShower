@@ -6,15 +6,15 @@
 
 // From https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
 var b = document.body || document.documentElement,
-	s = b.style,
-	p = 'transition';
+    s = b.style,
+    p = 'transition';
 
 if (typeof s[p] == 'string') { transitions = true; }
 
 // Tests for vendor specific prop
 var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'],
-	vLength = v.length,
-	i;
+    vLength = v.length,
+    i;
 p = p.charAt(0).toUpperCase() + p.substr(1);
 
 for (i = 0; i < vLength; i++) {
@@ -43,11 +43,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		heightTiming = typeof settingsArray[2] !== 'undefined' && settingsArray[2] !== 'default' ? settingsArray[2] : heightTiming;
 		modifyTitle = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== 'default' ? (settingsArray[3] == 'true') : modifyTitle;
 	}
-
-	// New String object method - adds a string inside another at specified index
-	String.prototype.addStrAt = function(idx, s) {
-		return (this.slice(0, idx) + s + this.slice(idx + 0));
-	};
 
 	// Add transitions rules to the page if CSS transitions are supported
 	if (transitions) {
@@ -92,7 +87,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		var that = this;
 		
 		if (modifyTitle) {
-			this.titleElement.text(this.titleElement.text().addStrAt(0, "+ "));
+			this.titleElement.text("+ " + this.titleElement.text());
 		}
 
 		this.textElement.addClass('notransition');
