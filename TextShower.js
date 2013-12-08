@@ -1,32 +1,8 @@
 /*!
- * TextShower v1.0.1 - jQuery version
+ * TextShower v1.0.3 - jQuery version
  * © 2013 Yohaï Berreby <yohaiberreby@gmail.com>
  * See http://github.com/filsmick/TextShower/ for license and instructions
  */
-
-// Snippet from https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
-var b = document.body || document.documentElement, s = b.style,
-    p = 'transition', i;
-
-if (typeof s[p] == 'string') {
-	transitions = true;
-}
-
-// Tests for vendor specific prop
-var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'],
-    vLength = v.length;
-
-p = p.charAt(0).toUpperCase() + p.substr(1);
-
-for (i = 0; i < vLength; i++) {
-	if (typeof s[v[i] + p] == 'string') {
-		transitions = true;
-	}
-}
-// End of snippet
-
-// transitions = false;
-// Uncomment the line above to use jQuery transitions instead of CSS ones
 
 function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	marginTiming = 'ease-out';
@@ -48,19 +24,43 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		modifyTitle = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== 'default' ? (settingsArray[3] == 'true') : modifyTitle;
 	}
 
+	// Snippet from https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
+	var b = document.body || document.documentElement, s = b.style,
+	    p = 'transition', i;
+
+	if (typeof s[p] == 'string') {
+		transitions = true;
+	}
+
+	// Tests for vendor specific prop
+	var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'],
+	    vLength = v.length;
+
+	p = p.charAt(0).toUpperCase() + p.substr(1);
+
+	for (i = 0; i < vLength; i++) {
+		if (typeof s[v[i] + p] == 'string') {
+			transitions = true;
+		}
+	}
+
+	transitions = false;
+	// Uncomment the line above to use jQuery transitions instead of CSS ones
+
 	// Add transitions rules to the page if CSS transitions are supported
+	var style = document.createElement('style'), commonStyle =
+		'.TextShower-title {'+
+			'-moz-user-select: none;'+
+			'-webkit-user-select: none;'+
+			'-ms-user-select:none;'+
+			'user-select:none;'+
+			'cursor: pointer;'+
+		'}';
+	style.type = 'text/css';
+
 	if (transitions) {
-		var style = document.createElement('style'),
 		transition = 'height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming;
-		style.type = 'text/css';
-		style.innerHTML =
-			'.TextShower-title {'+
-				'-moz-user-select: none;'+
-				'-webkit-user-select: none;'+
-				'-ms-user-select:none;'+
-				'user-select:none;'+
-				'cursor: pointer;'+
-			'}'+
+		style.innerHTML = commonStyle +
 			'.TextShower-text {'+
 				'overflow: hidden;'+
 				'-webkit-transition: ' + transition + ';' +
@@ -76,8 +76,11 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 				'-ms-transition: none !important;'+
 				'transition: none !important;'+
 			'}';
-		document.getElementsByTagName('head')[0].appendChild(style);
+		
+	} else {
+		style.innerHTML = commonStyle;
 	}
+	document.getElementsByTagName('head')[0].appendChild(style);
 
 	// Replaces hyphens of CSS properties
 	/-(.)/.exec(heightTiming);
@@ -86,10 +89,11 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	marginTiming = marginTiming.replace(/-(.)/, RegExp.$1.toUpperCase());
 	
 	// Constructor definition
+	// All boxes are treated as instances of class TextShowerBox
 	function TextShowerBox(box) {
 		var that = this;
-		this.titleElement = $(box).find($('.TextShower-title')),
-		this.textElement = $(box).find($('.TextShower-text')),
+		this.titleElement = $(box).find($('.TextShower-title'));
+		this.textElement = $(box).find($('.TextShower-text'));
 		this.deployed = false;
 		
 		if (modifyTitle) {
@@ -98,9 +102,9 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 
 		this.textElement.addClass('notransition');
 
-		this.prevHeight = this.textElement.css('height'),
-		this.prevMargin = this.textElement.css('margin'),
-		this.prevPaddingTop = this.textElement.css('paddingTop'),
+		this.prevHeight = this.textElement.css('height');
+		this.prevMargin = this.textElement.css('margin');
+		this.prevPaddingTop = this.textElement.css('paddingTop');
 		this.prevPaddingBottom = this.textElement.css('paddingBottom');
 		this.textElement.css('height', '0px');
 		this.textElement.css('margin', '0 0 0 0');
@@ -147,7 +151,8 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 			this.textElement.css('height', 'auto');
 			this.prevHeight = this.textElement.height() + 'px';
 			this.textElement.css('height', actualHeight);
-			// Here comes the code you want to be run WITHOUT TRANSITION when the box is opened
+			// The style modifications you apply here won't be animated, even if their
+			// properties are in the 'transitions' var.
 		
 			this.textElement.height(); // Refreshes height
 			this.textElement.removeClass('notransition');
@@ -168,19 +173,19 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 				
 				this.textElement.animate({ margin: this.prevMargin }, {
 					duration: marginDelay,
-					easing: 'linear',
+					easing: 'swing',
 					queue: false
 				});
 				
 				this.textElement.animate({ paddingTop: this.prevPaddingTop }, {
 					duration: marginDelay,
-					easing: 'linear',
+					easing: 'swing',
 					queue: false
 				});
 				
 				this.textElement.animate({ paddingBottom: this.prevPaddingBottom }, {
 					duration: marginDelay,
-					easing: 'linear',
+					easing: 'swing',
 					queue: false
 				});
 				// You can add jQuery .animate() here
@@ -222,19 +227,19 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 					
 					that.textElement.animate({ margin: '0 0 0 0' }, {
 						duration: marginDelay,
-						easing: 'linear',
+						easing: 'swing',
 						queue: false
 					});
 					
 					that.textElement.animate({ paddingTop: '0' }, {
 						duration: marginDelay,
-						easing: 'linear',
+						easing: 'swing',
 						queue: false
 					});
 					
 					that.textElement.animate({ paddingBottom: '0' }, {
 						duration: marginDelay,
-						easing: 'linear',
+						easing: 'swing',
 						queue: false
 					});
 					// You can add jQuery .animate() here
@@ -273,7 +278,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	var boxes = $('.TextShower-box'),
 	    boxesLength = boxes.length;
 
-	for (var i = 0; i < boxesLength; i++) {
+	for (i = 0; i < boxesLength; i++) {
 		new TextShowerBox(boxes[i]);
 	}
 }
