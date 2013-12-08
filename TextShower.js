@@ -44,7 +44,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		}
 	}
 
-	transitions = false;
+	// transitions = false;
 	// Uncomment the line above to use jQuery transitions instead of CSS ones
 
 	// Add transitions rules to the page if CSS transitions are supported
