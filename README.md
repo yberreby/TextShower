@@ -23,9 +23,9 @@ There is two ways to use TextShower. One is for those who don't care about anima
 
 ## The simple solution
 
-Firstly, ensure jQuery is embedded in your page. If it is not
+Firstly, ensure jQuery is embedded in your page. If it is not, go to [Google Hosted Libraries](https://developers.google.com/speed/libraries/devguide#jquery) and include it.
 
-Add the following code to your page:
+Then add the following code to your page:
 ``` html
 <div class="TextShower-box"> 
 	<strong class="TextShower-title">Headlines of the text</strong> 
@@ -43,7 +43,7 @@ Yup, you're done.
 
 ## The less simple one
 
-You are no satisfied? You want to have another timing? Another transition? Well, we'll do that.
+You are not satisfied? You want to have another timing? Another transition? Well, you can.
 
 Do everything like in the "Simple solution", excepted the embed. Don't load the script from GitHub servers. Instead, download TextShower.js or TextShower.min.js (the latter is the lighter), upload it on your FTP server then embed it as previously, but with your own path:  
 ```html
@@ -104,6 +104,8 @@ Made by [@filsmick](github.com/filsmick/) with Sublime Text 2.
 
 License
 ====
+
+(MIT license slightly modified)
 
 Copyright © 2013 Yohaï Berreby
 
