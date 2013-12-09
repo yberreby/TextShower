@@ -5,7 +5,10 @@
  */
 
 function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
-	marginTiming = 'ease-out';
+	marginTiming = 'ease';
+	var boxes = $('.TextShower-box'),
+        boxesLength = boxes.length,
+        transitions, i;
 
 	// If an argument is not specified, use default one
 	heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
@@ -15,18 +18,16 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 
 	// Check for the custom meta tag and retrieve its data
 	if ($('meta[data-TextShower]').length !== 0) {
-		var settings = $('meta[data-TextShower]').attr('data-TextShower'),
-		    settingsArray = settings.split(' ');
-
-		heightDelay = typeof settingsArray[0] !== 'undefined' && settingsArray[0] !== 'default' ? settingsArray[0] : heightDelay;
-		marginDelay = typeof settingsArray[1] !== 'undefined' && settingsArray[1] !== 'default' ? settingsArray[1] : marginDelay;
-		heightTiming = typeof settingsArray[2] !== 'undefined' && settingsArray[2] !== 'default' ? settingsArray[2] : heightTiming;
-		modifyTitle = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== 'default' ? (settingsArray[3] == 'true') : modifyTitle;
+		var settings = $('meta[data-TextShower]').attr('data-TextShower').split(' ');
+		heightDelay = typeof settings[0] !== 'undefined' && settings[0] !== 'default' ? settings[0] : heightDelay;
+		marginDelay = typeof settings[1] !== 'undefined' && settings[1] !== 'default' ? settings[1] : marginDelay;
+		heightTiming = typeof settings[2] !== 'undefined' && settings[2] !== 'default' ? settings[2] : heightTiming;
+		modifyTitle = typeof settings[3] !== 'undefined' && settings[3] !== 'default' ? (settings[3] == 'true') : modifyTitle;
 	}
 
 	// Snippet from https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
 	var b = document.body || document.documentElement, s = b.style,
-	    p = 'transition', i;
+	    p = 'transition';
 
 	if (typeof s[p] == 'string') {
 		transitions = true;
@@ -59,7 +60,9 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	style.type = 'text/css';
 
 	if (transitions) {
-		transition = 'height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming;
+		transition = 'height ' + heightDelay + ' ' + heightTiming + ', margin ' +
+			marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' +
+			marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming;
 		style.innerHTML = commonStyle +
 			'.TextShower-text {'+
 				'overflow: hidden;'+
@@ -89,7 +92,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	marginTiming = marginTiming.replace(/-(.)/, RegExp.$1.toUpperCase());
 	
 	// Constructor definition
-	// All boxes are treated as instances of class TextShowerBox
+	// All boxes are instances of the class TextShowerBox
 	function TextShowerBox(box) {
 		var that = this;
 		this.titleElement = $(box).find($('.TextShower-title'));
@@ -151,7 +154,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 			this.textElement.css('height', 'auto');
 			this.prevHeight = this.textElement.height() + 'px';
 			this.textElement.css('height', actualHeight);
-			// The style modifications you apply here won't be animated, even if their
+			// The style modifications applied here won't be animated, even if their
 			// properties are in the 'transitions' var.
 		
 			this.textElement.height(); // Refreshes height
@@ -275,9 +278,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		}
 	};
 
-	var boxes = $('.TextShower-box'),
-	    boxesLength = boxes.length;
-
+	// Creates a TextShowerBox instance for all HTML boxes
 	for (i = 0; i < boxesLength; i++) {
 		new TextShowerBox(boxes[i]);
 	}
