@@ -286,4 +286,6 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 
 // Edit the arguments of this function to customize the global script behavior
 // Can be overwritten by the custom meta tag (see documentation on github.com/filsmick/TextShower)
-TextShower('0.8s', '0.3s', 'ease', true);
+$(function() {
+	TextShower('0.8s', '0.3s', 'ease', true);
+});
