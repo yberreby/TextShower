@@ -154,7 +154,7 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 			this.textElement.css('height', 'auto');
 			this.prevHeight = this.textElement.height() + 'px';
 			this.textElement.css('height', actualHeight);
-			// The style modifications you apply here won't be animated, even if their
+			// The style modifications applied here won't be animated, even if their
 			// properties are in the 'transitions' var.
 		
 			this.textElement.height(); // Refreshes height
