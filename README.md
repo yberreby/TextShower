@@ -1,6 +1,6 @@
 Presentation
 ====
-[![Release 1.0.0](http://b.repl.ca/v1/Release-1.0.0-yellowgreen.png)](https://github.com/filsmick/TextShower/releases/tag/v1.0.0)
+[![release 1.0.3](http://b.repl.ca/v1/release-1.0.3-green.png)](https://github.com/filsmick/TextShower/releases/latest)
 
 Ever wanted a simple and customisable text slider that allows you to fold / unfold text on click, with animations and custom behavior? I think you found the right place.
 
@@ -8,13 +8,13 @@ Ever wanted a simple and customisable text slider that allows you to fold / unfo
 
 It is **not** a slideshow with arrows and images but a *text slider*.
 
-Example coming soon.
+[Example](http://filsmick.github.io/TextShower/)
 
 Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
 Downloads:  
-- [Developement (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.0/TextShower.js)  
-- [Minified (4 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.0/TextShower.min.js)
+- [Developement (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.js)  
+- [Minified (4 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.min.js)
 
 How to use
 ====
