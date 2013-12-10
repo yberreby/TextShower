@@ -25,23 +25,19 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		modifyTitle = typeof settings[3] !== 'undefined' && settings[3] !== 'default' ? (settings[3] == 'true') : modifyTitle;
 	}
 
-	// Snippet from https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
-	var b = document.body || document.documentElement, s = b.style,
-	    p = 'transition';
+	var transitions = false,
+	    prefixes = ['Webkit', 'Moz', 'O', 'ms'],
+	    div = document.createElement('div');
 
-	if (typeof s[p] == 'string') {
+	if (div.style.transition ) {
 		transitions = true;
-	}
-
-	// Tests for vendor specific prop
-	var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'],
-	    vLength = v.length;
-
-	p = p.charAt(0).toUpperCase() + p.substr(1);
-
-	for (i = 0; i < vLength; i++) {
-		if (typeof s[v[i] + p] == 'string') {
-			transitions = true;
+	} else {
+		var prefixesLength = prefixes.length;
+		for (i = 0; i < prefixesLength; i++) {
+			if (div.style[prefixes[i] + 'Transition' ] !== undefined) {
+				transitions = true;
+				break;
+			}
 		}
 	}
 
@@ -66,16 +62,16 @@ function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 		style.innerHTML = commonStyle +
 			'.TextShower-text {'+
 				'overflow: hidden;'+
-				'-webkit-transition: ' + transition + ';' +
-				'-moz-transition: ' + transition + ';' +
-				'-o-transition: ' + transition + ';' +
+				'-Webkit-transition: ' + transition + ';' +
+				'-Moz-transition: ' + transition + ';' +
+				'-O-transition: ' + transition + ';' +
 				'-ms-transition: ' + transition + ';' +
 				'transition: ' + transition + ';' +
 			'}'+
 			'.notransition {'+
-				'-webkit-transition: none !important;'+
-				'-moz-transition: none !important;'+
-				'-o-transition: none !important;'+
+				'-Webkit-transition: none !important;'+
+				'-Moz-transition: none !important;'+
+				'-O-transition: none !important;'+
 				'-ms-transition: none !important;'+
 				'transition: none !important;'+
 			'}';
