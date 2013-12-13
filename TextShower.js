@@ -7,8 +7,7 @@
 function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
 	marginTiming = 'ease';
 	var boxes = $('.TextShower-box'),
-        boxesLength = boxes.length,
-        transitions, i;
+        boxesLength = boxes.length, i;
 
 	// If an argument is not specified, use default one
 	heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
