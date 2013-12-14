@@ -1,289 +1,204 @@
 /*!
- * TextShower v1.0.3 - jQuery version
- * © 2013 Yohaï Berreby <yohaiberreby@gmail.com>
- * See http://github.com/filsmick/TextShower/ for license and instructions
+ * TextShower - Super simple CSS and JS TextSlider
+ * (c) 2013 Yohaï Berreby <yohaiberreby@gmail.com>
+ * License: https://github.com/filsmick/TextShower/blob/master/LICENSE
+ *
+ * http://filsmick.github.io/TextShower/
+ * http://github.com/filsmick/TextShower/
  */
 
-function TextShower(heightDelay, marginDelay, heightTiming, modifyTitle) {
-	marginTiming = 'ease';
-	var boxes = $('.TextShower-box'),
-        boxesLength = boxes.length,
-        transitions, i;
+function TextShower(heightDelay, marginDelay, heightTiming, marginTiming, modifyTitle) {
 
-	// If an argument is not specified, use default one
-	heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
-	marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
-	heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
-	modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
+    // Init
+    var timer;
 
-	// Check for the custom meta tag and retrieve its data
-	if ($('meta[data-TextShower]').length !== 0) {
-		var settings = $('meta[data-TextShower]').attr('data-TextShower').split(' ');
-		heightDelay = typeof settings[0] !== 'undefined' && settings[0] !== 'default' ? settings[0] : heightDelay;
-		marginDelay = typeof settings[1] !== 'undefined' && settings[1] !== 'default' ? settings[1] : marginDelay;
-		heightTiming = typeof settings[2] !== 'undefined' && settings[2] !== 'default' ? settings[2] : heightTiming;
-		modifyTitle = typeof settings[3] !== 'undefined' && settings[3] !== 'default' ? (settings[3] == 'true') : modifyTitle;
-	}
+    // If an argument is not specified, use default one
+    heightDelay = typeof heightDelay !== 'undefined' ? heightDelay : '0.8s';
+    marginDelay = typeof marginDelay !== 'undefined' ? marginDelay : '0.3s';
+    heightTiming = typeof heightTiming !== 'undefined' ? heightTiming : 'ease';
+    marginTiming = typeof marginTiming !== 'undefined' ? marginTiming : 'linear';
+    modifyTitle = typeof modifyTitle !== 'undefined' ? modifyTitle : true;
 
-	// Snippet from https://gist.github.com/jackfuchs/556448 and http://stackoverflow.com/a/7265037/2754323
-	var b = document.body || document.documentElement, s = b.style,
-	    p = 'transition';
+    // Check for the custom meta tag and retrieve its data
+    if (document.querySelector('meta[data-TextShower]') != null) {
+        var settings = document.querySelector('meta[data-TextShower]').getAttribute('data-TextShower');
+        var settingsArray = settings.split(' ');
 
-	if (typeof s[p] == 'string') {
-		transitions = true;
-	}
+        heightDelay = typeof settingsArray[0] !== 'undefined' && settingsArray[0] !== 'none' ? settingsArray[0] : heightDelay;
+        marginDelay = typeof settingsArray[1] !== 'undefined' && settingsArray[1] !== 'none' ? settingsArray[1] : marginDelay;
+        heightTiming = typeof settingsArray[2] !== 'undefined' && settingsArray[2] !== 'none' ? settingsArray[2] : heightTiming;
+        marginTiming = typeof settingsArray[3] !== 'undefined' && settingsArray[3] !== 'none' ? settingsArray[3] : marginTiming;
+        modifyTitle = typeof settingsArray[4] !== 'undefined' && settingsArray[4] !== 'none' ? (settingsArray[4] == 'true') : modifyTitle;
+    }
 
-	// Tests for vendor specific prop
-	var v = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'],
-	    vLength = v.length;
+    // Edit the .splice() method
+    String.prototype.splice = function(idx, rem, s) {
+        return (this.slice(0, idx) + s + this.slice(idx + Math.abs(rem)));
+    }
 
-	p = p.charAt(0).toUpperCase() + p.substr(1);
+    // Cross-browsers event handling function
 
-	for (i = 0; i < vLength; i++) {
-		if (typeof s[v[i] + p] == 'string') {
-			transitions = true;
-		}
-	}
+    function addEvent(element, eventName, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(eventName, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + eventName, handler);
+        } else {
+            element['on' + eventName] = handler;
+        }
+    }
 
-	// transitions = false;
-	// Uncomment the line above to use jQuery transitions instead of CSS ones
+    // Anchors support
 
-	// Add transitions rules to the page if CSS transitions are supported
-	var style = document.createElement('style'), commonStyle =
-		'.TextShower-title {'+
-			'-moz-user-select: none;'+
-			'-webkit-user-select: none;'+
-			'-ms-user-select:none;'+
-			'user-select:none;'+
-			'cursor: pointer;'+
-		'}';
-	style.type = 'text/css';
+    function anchorNav(titleElement, textElement, changeState, deployed, durationArray) {
+        if (window.location.hash.substring(1) == titleElement.id && window.location.hash.substring(1) != '') {
+            textElement.className += ' notransition';
 
-	if (transitions) {
-		transition = 'height ' + heightDelay + ' ' + heightTiming + ', margin ' +
-			marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' +
-			marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming;
-		style.innerHTML = commonStyle +
-			'.TextShower-text {'+
-				'overflow: hidden;'+
-				'-webkit-transition: ' + transition + ';' +
-				'-moz-transition: ' + transition + ';' +
-				'-o-transition: ' + transition + ';' +
-				'-ms-transition: ' + transition + ';' +
-				'transition: ' + transition + ';' +
-			'}'+
-			'.notransition {'+
-				'-webkit-transition: none !important;'+
-				'-moz-transition: none !important;'+
-				'-o-transition: none !important;'+
-				'-ms-transition: none !important;'+
-				'transition: none !important;'+
-			'}';
-		
-	} else {
-		style.innerHTML = commonStyle;
-	}
-	document.getElementsByTagName('head')[0].appendChild(style);
+            if (!deployed) {
+                changeState(titleElement, textElement);
+            }
 
-	// Replaces hyphens of CSS properties
-	/-(.)/.exec(heightTiming);
-	heightTiming = heightTiming.replace(/-(.)/, RegExp.$1.toUpperCase());
-	/-(.)/.exec(marginTiming);
-	marginTiming = marginTiming.replace(/-(.)/, RegExp.$1.toUpperCase());
-	
-	// Constructor definition
-	// All boxes are instances of the class TextShowerBox
-	function TextShowerBox(box) {
-		var that = this;
-		this.titleElement = $(box).find($('.TextShower-title'));
-		this.textElement = $(box).find($('.TextShower-text'));
-		this.deployed = false;
-		
-		if (modifyTitle) {
-			this.titleElement.text("+ " + this.titleElement.text());
-		}
+            setTimeout(function() {
+                titleElement.scrollIntoView(true);
+            }, 0);
 
-		this.textElement.addClass('notransition');
+            setTimeout(function() {
+                textElement.className = textElement.className.replace(' notransition', '');
+            }, Math.max.apply(Math, durationArray) * 1000);
+        }
+    }
 
-		this.prevHeight = this.textElement.css('height');
-		this.prevMargin = this.textElement.css('margin');
-		this.prevPaddingTop = this.textElement.css('paddingTop');
-		this.prevPaddingBottom = this.textElement.css('paddingBottom');
-		this.textElement.css('height', '0px');
-		this.textElement.css('margin', '0 0 0 0');
-		this.textElement.css('padding-top', '0');
-		this.textElement.css('padding-bottom', '0');
-		this.titleElement.css('margin-bottom', this.titleElement.css('margin-bottom').substring(0, -2) / 2);
-		// You can add .css() here to define the "JavaScript" style of your boxes. Example:
-		// this.titleElement.css('color', 'blue');
-		// All your boxes will become blue!
+    // Add transitions rules to the page
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = '.TextShower-title {\
+	-moz-user-select: none;\
+	-webkit-user-select: none;\
+	-ms-user-select:none;\
+	user-select:none;\
+	} \
+	.TextShower-text {\
+	overflow: hidden;\
+	-webkit-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-moz-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-o-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	-ms-transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	transition: height ' + heightDelay + ' ' + heightTiming + ', margin ' + marginDelay + ' ' + marginTiming + ', padding-top ' + marginDelay + ' ' + marginTiming + ', padding-bottom ' + heightDelay + ' ' + heightTiming + ';\
+	}\
+	.notransition {\
+	-webkit-transition: none !important;\
+	-moz-transition: none !important;\
+	-o-transition: none !important;\
+	-ms-transition: none !important;\
+	transition: none !important;\
+	}';
+    document.getElementsByTagName('head')[0].appendChild(style);
 
-		setTimeout(function() {
-			that.textElement.removeClass('notransition');
-		}, 0);
 
-		this.durationArray = [];
-		
-		var pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g)),
-		    pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
-		this.durationArray.push(pureHeightDelay, pureMarginDelay);
+    // Prepare boxes
+    function PrepareBox(box) {
+        var titleElement = box.getElementsByClassName('TextShower-title')[0],
+            textElement = box.getElementsByClassName('TextShower-text')[0];
 
-		$(window).bind("hashchange", function() {
-			that.anchorNav();
-		});
+        if (modifyTitle) {
+            titleElement.textContent = titleElement.textContent.splice(0, 0, "+ ");
+        }
 
-		this.anchorNav();
+        textElement.className += ' notransition';
 
-		$(this.titleElement).click(function() {
-			that.changeState();
-		});
-	}
+        var prevHeight = getComputedStyle(textElement).height;
+        var prevMargin = getComputedStyle(textElement).margin;
+        var prevPaddingTop = getComputedStyle(textElement).paddingTop;
+        var prevPaddingBottom = getComputedStyle(textElement).paddingBottom;
+        textElement.style.height = '0px';
+        textElement.style.margin = '0 0 0 0';
+        textElement.style.paddingTop = '0';
+        textElement.style.paddingBottom = '0';
 
-	TextShowerBox.prototype = {
-		openBox: function() {
-			this.deployed = true;
-			var that = this;
-		
-			if (modifyTitle) {
-				this.titleElement.text(this.titleElement.text().replace('+', '-'));
-			}
-		
-			var actualHeight = this.textElement.height() + 'px';
-			this.textElement.addClass('notransition');
-		
-			this.textElement.css('height', 'auto');
-			this.prevHeight = this.textElement.height() + 'px';
-			this.textElement.css('height', actualHeight);
-			// The style modifications applied here won't be animated, even if their
-			// properties are in the 'transitions' var.
-		
-			this.textElement.height(); // Refreshes height
-			this.textElement.removeClass('notransition');
+        titleElement.style.cursor = 'pointer';
+        titleElement.style.marginBottom = titleElement.style.marginBottom / 2;
 
-			function transEnd() {
-				that.textElement.addClass('notransition');
-				that.textElement.css('height', 'auto');
-				that.prevHeight = that.textElement.height() + 'px';
-			}
-		
-			if (!transitions) {
-				this.textElement.animate({ height: this.prevHeight }, {
-					duration: heightDelay,
-					easing: 'swing',
-					queue: false,
-					complete: transEnd
-				});
-				
-				this.textElement.animate({ margin: this.prevMargin }, {
-					duration: marginDelay,
-					easing: 'swing',
-					queue: false
-				});
-				
-				this.textElement.animate({ paddingTop: this.prevPaddingTop }, {
-					duration: marginDelay,
-					easing: 'swing',
-					queue: false
-				});
-				
-				this.textElement.animate({ paddingBottom: this.prevPaddingBottom }, {
-					duration: marginDelay,
-					easing: 'swing',
-					queue: false
-				});
-				// You can add jQuery .animate() here
-			} else {
-				this.textElement.css('height', this.prevHeight);
-				this.textElement.css('margin', this.prevMargin);
-				this.textElement.css('padding-top', this.prevPaddingTop);
-				this.textElement.css('padding-bottom', this.prevPaddingBottom);
-				// Add code to be run with CSS transitions when the box is opened here
-				// (will work only if you have added your properties to the 'transition' variable)
-		
-				this.timer = setTimeout(transEnd, Math.max.apply(Math, this.durationArray) * 1000);
-			}
-		},
-		
-		closeBox: function() {
-			this.deployed = false;
-		
-			if (modifyTitle) {
-				this.titleElement.text(this.titleElement.text().replace('-', '+'));
-			}
-		
-			if (this.timer !== undefined) { clearTimeout(this.timer); }
-			this.prevHeight = this.textElement.height();
-			this.textElement.css('height', this.textElement.height() + "px");
-		
-			// Here code will be run without transitions when the box is closed
+        textElement.offsetHeight;
+        textElement.className = textElement.className.replace(' notransition', '');
 
-			var that = this;
-			setTimeout(function() {
-				// And, well, also here
-				that.textElement.removeClass('notransition');
-				if (!transitions) {
-					that.textElement.animate({ height: '0px' }, {
-						duration: heightDelay,
-						easing: 'swing',
-						queue: false
-					});
-					
-					that.textElement.animate({ margin: '0 0 0 0' }, {
-						duration: marginDelay,
-						easing: 'swing',
-						queue: false
-					});
-					
-					that.textElement.animate({ paddingTop: '0' }, {
-						duration: marginDelay,
-						easing: 'swing',
-						queue: false
-					});
-					
-					that.textElement.animate({ paddingBottom: '0' }, {
-						duration: marginDelay,
-						easing: 'swing',
-						queue: false
-					});
-					// You can add jQuery .animate() here
-				} else {
-					that.textElement.css('height', '0px');
-					that.textElement.css('margin', '0 0 0 0');
-					that.textElement.css('padding-top', '0');
-					that.textElement.css('padding-bottom', '0');
-					// Add code to be run with CSS transitions when the box is opened here
-					// (will only work if you have added your properties to the 'transition' variable)
-				}
-			}, 0);
-		},
+        var deployed = false;
 
-		changeState: function(deployed) {
-			if (deployed === undefined) {
-				deployed = this.deployed;
-			}
+        var durationArray = [],
+            pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g)),
+            pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
+        durationArray.push(pureHeightDelay, pureMarginDelay);
 
-			if (!deployed) {
-				this.openBox();
-			} else {
-				this.closeBox();
-			}
-		},
-		
-		// Anchors support
-		anchorNav: function() {
-			if (window.location.hash.substring(1) == this.titleElement.attr('id') && window.location.hash.substring(1) !== '') {
-				this.changeState(false);
-				this.titleElement[0].scrollIntoView(true);
-			}
-		}
-	};
 
-	// Creates a TextShowerBox instance for all HTML boxes
-	for (i = 0; i < boxesLength; i++) {
-		new TextShowerBox(boxes[i]);
-	}
+        addEvent(window, 'hashchange', function() {
+            anchorNav(titleElement, textElement, changeState, deployed, durationArray);
+        })
+
+        anchorNav(titleElement, textElement, changeState, deployed, durationArray);
+
+        // Toggle box state
+        function changeState(titleElement, textElement) {
+            if (!deployed) {
+                deployed = true;
+
+                if (modifyTitle) {
+                    titleElement.textContent = titleElement.textContent.replace('+', '-');
+                }
+
+
+                var actualHeight = getComputedStyle(textElement).height;
+                textElement.className += ' notransition';
+                textElement.style.height = 'auto';
+                prevHeight = getComputedStyle(textElement).height;
+                textElement.style.height = actualHeight;
+
+                setTimeout(function() {
+                    textElement.className = textElement.className.replace(' notransition', '');
+                    textElement.style.height = prevHeight;
+                    textElement.style.margin = prevMargin;
+                    textElement.style.paddingTop = prevPaddingTop;
+                    textElement.style.paddingBottom = prevPaddingBottom;
+                }, 0);
+
+                timer = setTimeout(function transEnd() {
+                    textElement.className += ' notransition';
+                    textElement.style.height = 'auto';
+                    prevHeight = getComputedStyle(textElement).height;
+                }, Math.max.apply(Math, durationArray) * 1000);
+            } else {
+                deployed = false;
+
+                clearTimeout(timer);
+
+
+                if (modifyTitle) {
+                    titleElement.textContent = titleElement.textContent.replace('-', '+');
+                }
+
+                prevHeight = textElement.style.height = getComputedStyle(textElement).height;
+
+                setTimeout(function() {
+                    textElement.className = textElement.className.replace(' notransition', '');
+                    textElement.style.height = '0px';
+                    textElement.style.margin = '0 0 0 0';
+                    textElement.style.paddingTop = '0';
+                    textElement.style.paddingBottom = '0';
+                }, 0);
+            }
+        }
+
+        // Toggle box state on click
+        addEvent(titleElement, 'click', function() {
+            changeState(titleElement, textElement);
+        })
+    }
+
+    var boxes = document.getElementsByClassName('TextShower-box');
+
+    for (var i = boxes.length - 1; i >= 0; i--) {
+        PrepareBox(boxes[i]);
+    }
 }
 
 // Edit the arguments of this function to customize the global script behavior
-// Can be overwritten by the custom meta tag (see documentation on github.com/filsmick/TextShower)
-TextShower('0.8s', '0.3s', 'ease', true);
+// Can be overwritten by the custom meta tag
+TextShower('0.8s', '0.3s', 'ease', 'linear', true);
