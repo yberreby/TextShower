@@ -252,22 +252,20 @@
 			
 			# Anchors support
 			anchorNav: ->
-				if window.location.hash.substring(1) is @titleElement.attr('id') and
-				window.location.hash.substring(1) isnt ''
+				hash = window.location.hash.substring(1)
+				if hash is @titleElement.attr('id') and hash isnt ''
 					@changeState(false)
 					@titleElement[0].scrollIntoView(true)
 		}
 
 		# Creates a TextShowerBox instance for all HTML boxes
 		boxes = $('.TextShower-box')
-		boxesLength = boxes.length
 
 		for box in boxes
 			new TextShowerBox(box)
 
 	# Executes the main function, giving it $ as an alias of the jQuery object
 	# It allows the script to run under WordPress's noConflict mode
-	(($) ->
-		# Edit the arguments of this function to customize the global script behavior
+	do ($ = window.jQuery) ->
+		# Edit the arguments of this function to customize the global behavior of the script
 		$ -> TextShower('0.8s', '0.3s', 'ease', true, '+ ', '- ')
-	) window.jQuery
