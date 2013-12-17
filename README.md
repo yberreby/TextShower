@@ -95,13 +95,6 @@ So if you have any bug in one of these browsers:
 
 It is a real issue and should be [reported](https://github.com/filsmick/TextShower/issues/new) along with the error you encountered.
 
-
-Credits
-====
-
-Made by [@filsmick](github.com/filsmick/) with Sublime Text 2.
-
-
 License
 ====
 
