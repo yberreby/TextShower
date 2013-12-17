@@ -1,6 +1,6 @@
 Presentation
 ====
-[![release 1.0.1](http://b.repl.ca/v1/release-1.0.1-green.png)](https://github.com/filsmick/TextShower/releases/latest)
+[![release 1.0.2](http://b.repl.ca/v1/release-1.0.2-green.png)](https://github.com/filsmick/TextShower/releases/latest)
 
 Ever wanted a simple and customisable jQuery plugin that allows you to fold / unfold text on click, with animations and custom behavior? I think you found the right place.
 
