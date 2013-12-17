@@ -132,7 +132,7 @@
 
 			@anchorNav()
 
-		TextShowerBox.prototype = {
+		TextShowerBox.prototype =
 			openBox: ->
 				@deployed = true
 			
@@ -256,7 +256,7 @@
 				if hash is @titleElement.attr('id') and hash isnt ''
 					@changeState(false)
 					@titleElement[0].scrollIntoView(true)
-		}
+			# End of Prototype object
 
 		# Creates a TextShowerBox instance for all HTML boxes
 		boxes = $('.TextShower-box')
