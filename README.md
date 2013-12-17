@@ -13,8 +13,8 @@ It is **not** a slideshow with arrows and images but a *text slider*.
 Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
 Downloads:  
-- [Developement (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.js)  
-- [Minified (4 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.min.js)
+- [Developement (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.2/TextShower.js)  
+- [Minified (4 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.2/TextShower.min.js)
 
 How to use
 ====
