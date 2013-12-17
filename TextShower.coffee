@@ -1,5 +1,5 @@
 	###
-	TextShower v1.0.4 - jQuery version
+	TextShower v1.0.2 - jQuery version
 	© 2013 Yohaï Berreby <yohaiberreby@gmail.com>
 	See http://github.com/filsmick/TextShower/ for license and instructions
 	###
