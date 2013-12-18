@@ -8,7 +8,7 @@ Ever wanted a simple and customisable jQuery plugin that allows you to fold / un
 
 It is **not** a slideshow with arrows and images but a *text slider*.
 
-[Example](http://filsmick.github.io/TextShower/)
+[Example](http://filsmick.github.io/pages/TextShower/)
 
 Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
