@@ -13,8 +13,8 @@ It is **not** a slideshow with arrows and images but a *text slider*.
 Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
 Downloads:  
-- [Developement (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.2/TextShower.js)  
-- [Minified (4 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.2/TextShower.min.js)
+- [Developement (12 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.2/TextShower.js)  
+- [Minified (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.2/TextShower.min.js)
 
 How to use
 ====
@@ -52,14 +52,13 @@ Do everything like in the "Simple solution", excepted the embed. Don't load the 
 Now, open the .js file in a text editor and edit the last line of the code:
 
 ``` javascript
-TextShower('0.8s', '0.3s', 'ease', true);
+TextShower('0.8s', '0.3s', 'ease', true, '+ ', '- ');
 ```
 
 This function is what we want to edit. Here are its arguments:
 
-```
-TextShower([height transition duration], [margin transition duration], [timing function], [should add a dynamic '+' to the box title? true/false])
-```
+*TextShower([height transition duration], [margin transition duration], [timing function], [should add a dynamic '+' to the box title? true/false], [title prefix when the box is closed], [title prefix when the box is opened])*
+
 Simply replace the default values by what you want, save and you changes will be reflected sitewide.
 
 
