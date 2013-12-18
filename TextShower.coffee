@@ -255,7 +255,7 @@
 				hash = window.location.hash.substring(1)
 				if hash is @titleElement.attr('id') and hash isnt ''
 					@changeState(false)
-					@titleElement[0].scrollIntoView(true)
+					setTimeout(@titleElement[0].scrollIntoView(true), Math.max.apply(Math, @durationArray) * 1000)
 			# End of Prototype object
 
 		# Creates a TextShowerBox instance for all HTML boxes

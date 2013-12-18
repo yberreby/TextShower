@@ -10,7 +10,7 @@
   var TextShower;
 
   TextShower = function(heightDelay, marginDelay, heightTiming, modifyTitle, closedDynStr, openedDynStr) {
-    var TextShowerBox, box, boxes, boxesLength, commonStyle, div, i, marginTiming, prefixes, prefixesLength, settings, style, transition, transitions, _i, _j, _len, _len1, _results;
+    var TextShowerBox, box, boxes, commonStyle, div, i, marginTiming, prefixes, prefixesLength, settings, style, transition, transitions, _i, _j, _len, _len1, _results;
     marginTiming = 'ease';
     if (heightDelay == null) {
       heightDelay = "0.5s";
@@ -236,14 +236,15 @@
         }
       },
       anchorNav: function() {
-        if (window.location.hash.substring(1) === this.titleElement.attr('id') && window.location.hash.substring(1) !== '') {
+        var hash;
+        hash = window.location.hash.substring(1);
+        if (hash === this.titleElement.attr('id') && hash !== '') {
           this.changeState(false);
-          return this.titleElement[0].scrollIntoView(true);
+          return setTimeout(this.titleElement[0].scrollIntoView(true), Math.max.apply(Math, this.durationArray) * 1000);
         }
       }
     };
     boxes = $('.TextShower-box');
-    boxesLength = boxes.length;
     _results = [];
     for (_j = 0, _len1 = boxes.length; _j < _len1; _j++) {
       box = boxes[_j];
