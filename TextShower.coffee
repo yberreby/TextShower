@@ -18,6 +18,7 @@ do ($ = window.jQuery) ->
 		modifyTitle = true
 		closedDynStr = '+ '
 		openedDynStr = '- '
+		
 		CSSTransitions = true
 		# Set the above variable to false to use only jQuery animations
 	
@@ -91,49 +92,48 @@ do ($ = window.jQuery) ->
 		document.querySelector('head').appendChild(style)
 		
 		# Constructor definition
-		# All boxes are instances of the class TextShowerBox
-		TextShowerBox = (box) ->
-			@titleElement = $(box).find($('.TextShower-title'))
-			@textElement = $(box).find($('.TextShower-text'))
-			@deployed = false
-			
-			if modifyTitle
-				@titleElement.text(closedDynStr + @titleElement.text())
-	
-			@textElement.addClass('notransition')
-	
-			@prevHeight = @textElement.css('height')
-			@prevMargin = @textElement.css('margin')
-			@prevPaddingTop = @textElement.css('paddingTop')
-			@prevPaddingBottom = @textElement.css('paddingBottom')
-				.css('height', '0px')
-				.css('margin', '0 0 0 0')
-				.css('padding-top', '0')
-				.css('padding-bottom', '0')
-			@titleElement.css('margin-bottom', @titleElement.css('margin-bottom').substring(0, -2) / 2)
-			# You can add .css() here to define the "JavaScript" style of your boxes.
-			# Example: @titleElement.css('color', 'blue')
-			# All your titles would become blue!
-	
-			setTimeout(=>
-				@textElement.removeClass('notransition')
-			, 0)
-	
-			# Creates an array containing the two delays
-			@durationArray = []
-			pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g))
-			pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g))
-			@durationArray.push(pureHeightDelay, pureMarginDelay)
-	
-			$(@titleElement).click =>
-				@changeState()
-	
-			$(window).bind "hashchange", =>
+		# All boxes are instances of the class TSBox
+		class TSBox
+			constructor: (box) ->
+				@titleElement = $(box).find($('.TextShower-title'))
+				@textElement = $(box).find($('.TextShower-text'))
+				@deployed = false
+				
+				if modifyTitle
+					@titleElement.text(closedDynStr + @titleElement.text())
+		
+				@textElement.addClass('notransition')
+		
+				@prevHeight = @textElement.css('height')
+				@prevMargin = @textElement.css('margin')
+				@prevPaddingTop = @textElement.css('paddingTop')
+				@prevPaddingBottom = @textElement.css('paddingBottom')
+					.css('height', '0px')
+					.css('margin', '0 0 0 0')
+					.css('padding-top', '0')
+					.css('padding-bottom', '0')
+				@titleElement.css('margin-bottom', @titleElement.css('margin-bottom').substring(0, -2) / 2)
+				# You can add .css() here to define the "JavaScript" style of your boxes.
+				# Example: @titleElement.css('color', 'blue')
+				# All your titles would become blue!
+		
+				setTimeout (=>
+					@textElement.removeClass('notransition')
+				), 0
+		
+				# Extracts the float value of the delays and converts the greatest in ms
+				floatHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g))
+				floatMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g))
+				@longestDuration = Math.max.apply(Math, [floatHeightDelay, floatMarginDelay]) * 1000
+		
+				$(@titleElement).click =>
+					@changeState()
+		
+				$(window).bind "hashchange", =>
+					@anchorNav()
+
 				@anchorNav()
-	
-			@anchorNav()
-	
-		TextShowerBox.prototype =
+
 			openBox: ->
 				@deployed = true
 			
@@ -154,8 +154,7 @@ do ($ = window.jQuery) ->
 					.removeClass('notransition')
 	
 				transEnd = =>
-					@textElement.addClass('notransition')
-						.css('height', 'auto')
+					@textElement.addClass('notransition').css('height', 'auto')
 					@prevHeight = @textElement.height() + 'px'
 			
 				if !transitions
@@ -172,7 +171,7 @@ do ($ = window.jQuery) ->
 						easing: 'swing',
 						queue: false
 					})
-					
+
 					.animate({ paddingTop: @prevPaddingTop }, {
 						duration: marginDelay,
 						easing: 'swing',
@@ -187,9 +186,9 @@ do ($ = window.jQuery) ->
 					# You can add jQuery .animate() here
 				else
 					@textElement.css('height', @prevHeight)
-					@textElement.css('margin', @prevMargin)
-					@textElement.css('padding-top', @prevPaddingTop)
-					@textElement.css('padding-bottom', @prevPaddingBottom)
+						.css('margin', @prevMargin)
+						.css('padding-top', @prevPaddingTop)
+						.css('padding-bottom', @prevPaddingBottom)
 					# Add code to be run with CSS transitions when the box is opened here
 					# (will work only if you have added your properties to the 'transition' variable)
 	
@@ -200,8 +199,7 @@ do ($ = window.jQuery) ->
 				@deployed = false
 			
 				if modifyTitle
-					@titleElement.text(@titleElement.text().replace(openedDynStr,
-						closedDynStr))
+					@titleElement.text(@titleElement.text().replace(openedDynStr, closedDynStr))
 			
 				if @timer? then clearTimeout(@timer)
 				@prevHeight = @textElement.height()
@@ -258,11 +256,10 @@ do ($ = window.jQuery) ->
 				hash = window.location.hash.substring(1)
 				if hash is @titleElement.attr('id') and hash isnt ''
 					@changeState(false)
-					setTimeout(@titleElement[0].scrollIntoView(true), Math.max.apply(Math, @durationArray) * 1000)
-			# End of Prototype object
-	
-		# Creates a TextShowerBox instance for all HTML boxes
+					# Scrolls to the title of the box once the longest transition
+					setTimeout(@titleElement[0].scrollIntoView(true), @longestTransition)
+
+		# Creates a TSBox instance for all HTML boxes
 		boxes = $('.TextShower-box')
-	
 		for box in boxes
-			new TextShowerBox(box)
+			new TSBox(box)
