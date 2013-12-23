@@ -16,11 +16,12 @@ do ($ = window.jQuery) ->
 		heightTiming = 'easeIn'
 		marginTiming = 'ease'
 		modifyTitle = true
-		closedDynStr = '+ '
-		openedDynStr = '- '
-		
 		CSSTransitions = true
 		# Set the above variable to false to use only jQuery animations
+		
+		# These variables shouldn't be modified
+		closedDynStr = '+ '
+		openedDynStr = '- '
 	
 		# Checks for CSS transitions support
 		if CSSTransitions
@@ -45,6 +46,7 @@ do ($ = window.jQuery) ->
 			marginDelay ?= settings[1] if settings[1] isnt "default"
 			heightTiming ?= settings[2] if settings[2] isnt "default"
 			modifyTitle ?= (settings[3] is 'true') if settings[3] isnt "default"
+			CSSTransitions ?= (settings[4] is 'true') if settings[4] isnt "default"
 	
 		# Adds transitions rules to the page if CSS transitions are supported
 		style = document.createElement('style')
