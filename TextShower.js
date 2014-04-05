@@ -87,6 +87,7 @@
         _this = this;
       this.titleElement = $(box).find($('.TextShower-title'));
       this.textElement = $(box).find($('.TextShower-text'));
+      this.deployed = false;
       if (modifyTitle) {
         this.titleElement.text(closedDynStr + this.titleElement.text());
       }
@@ -95,16 +96,11 @@
       this.prevMargin = this.textElement.css('margin');
       this.prevPaddingTop = this.textElement.css('paddingTop');
       this.prevPaddingBottom = this.textElement.css('paddingBottom');
-      if (!$(box).hasClass('TextShower-open')) {
-        this.deployed = false;
-        this.textElement.css('height', '0px');
-        this.textElement.css('margin', '0 0 0 0');
-        this.textElement.css('padding-top', '0');
-        this.textElement.css('padding-bottom', '0');
-        this.titleElement.css('margin-bottom', this.titleElement.css('margin-bottom').substring(0, -2) / 2);
-      } else {
-        this.deployed = true;
-      }
+      this.textElement.css('height', '0px');
+      this.textElement.css('margin', '0 0 0 0');
+      this.textElement.css('padding-top', '0');
+      this.textElement.css('padding-bottom', '0');
+      this.titleElement.css('margin-bottom', this.titleElement.css('margin-bottom').substring(0, -2) / 2);
       setTimeout(function() {
         return _this.textElement.removeClass('notransition');
       }, 0);

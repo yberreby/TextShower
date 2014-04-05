@@ -94,7 +94,8 @@
 		TextShowerBox = (box) ->
 			@titleElement = $(box).find($('.TextShower-title'))
 			@textElement = $(box).find($('.TextShower-text'))
-
+			@deployed = false
+			
 			if modifyTitle
 				@titleElement.text(closedDynStr + @titleElement.text())
 
@@ -104,19 +105,14 @@
 			@prevMargin = @textElement.css('margin')
 			@prevPaddingTop = @textElement.css('paddingTop')
 			@prevPaddingBottom = @textElement.css('paddingBottom')
-
-			if not $(box).hasClass('TextShower-open')
-				@deployed = false
-				@textElement.css('height', '0px')
-				@textElement.css('margin', '0 0 0 0')
-				@textElement.css('padding-top', '0')
-				@textElement.css('padding-bottom', '0')
-				@titleElement.css('margin-bottom', @titleElement.css('margin-bottom').substring(0, -2) / 2)
-				# You can add .css() here to define the "JavaScript" style of your boxes.
-				# Example: @titleElement.css('color', 'blue')
-				# All your boxes would become blue!
-			else
-				@deployed = true
+			@textElement.css('height', '0px')
+			@textElement.css('margin', '0 0 0 0')
+			@textElement.css('padding-top', '0')
+			@textElement.css('padding-bottom', '0')
+			@titleElement.css('margin-bottom', @titleElement.css('margin-bottom').substring(0, -2) / 2)
+			# You can add .css() here to define the "JavaScript" style of your boxes.
+			# Example: @titleElement.css('color', 'blue')
+			# All your boxes would become blue!
 
 			setTimeout(=>
 				@textElement.removeClass('notransition')
