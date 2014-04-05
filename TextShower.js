@@ -108,6 +108,9 @@
       pureHeightDelay = parseFloat(heightDelay.match(/\d+\.?\d*/g));
       pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g));
       this.durationArray.push(pureHeightDelay, pureMarginDelay);
+      if ($(box).hasClass('TextShower-open')) {
+        this.changeState();
+      }
       $(this.titleElement).click(function() {
         return _this.changeState();
       });

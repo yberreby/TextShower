@@ -124,6 +124,8 @@
 			pureMarginDelay = parseFloat(marginDelay.match(/\d+\.?\d*/g))
 			@durationArray.push(pureHeightDelay, pureMarginDelay)
 
+			if $(box).hasClass('TextShower-open') then @changeState()
+
 			$(@titleElement).click =>
 				@changeState()
 
