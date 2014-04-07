@@ -38,7 +38,7 @@ And embed TextShower just before closing the `body` tag (*after* jQuery):
 <script src="http://filsmick.github.io/javascripts/TextShower.min.js"></script>
 ```
 
-Yup, you're done.
+…and you're done.
 
 
 ## The less simple one
@@ -46,18 +46,20 @@ Yup, you're done.
 You are not satisfied? You want to have another timing? Another transition? Well, you can.
 
 Do everything like in the "Simple solution", excepted the embed. Don't load the script from GitHub servers. Instead, download TextShower.js or TextShower.min.js (the latter is the lighter), upload it on your FTP server then embed it as previously, but with your own path:  
+
 ```html
 <script src="/path/to/TextShower.min.js"></script>
 ```
-Now, open the .js file in a text editor and edit the last line of the code:
+Now, open the .js file on your FTP with a text editor and edit these lines (at the beginning):
 
-``` javascript
-TextShower('0.8s', '0.3s', 'ease', true, '+ ', '- ');
+``` coffeescript
+heightDelay = '0.5s'
+marginDelay = '0.55s'
+heightTiming = 'easeIn'
+marginTiming = 'ease'
+modifyTitle = true
+CSSTransitions = true
 ```
-
-This function is what we want to edit. Here are its arguments:
-
-*TextShower([height transition duration], [margin transition duration], [timing function], [should add a dynamic '+' to the box title? true/false], [title prefix when the box is closed], [title prefix when the box is opened])*
 
 Simply replace the default values by what you want, save and you changes will be reflected sitewide.
 
@@ -69,7 +71,7 @@ But let's imagine you have a website with two sliders. One is in the documentati
 In order to do that, you must add a `meta` tag to the pages you want to change settings:
 
 ```html
-<meta data-TextShower="default 0.3s default linear true" />
+<meta data-TextShower="default 0.3s default linear true true" />
 ```
 In this example, you can see almost the same structure as in .js file's function. The differences are that here, you don't need quotes or commas, you can simply put spaces between settings, and you can tell the script to use the default settings (those in the js file, you know) for certain parameters.
 
@@ -77,7 +79,7 @@ And now, your pages have different transitions and everyone is happy.
 
 ## And if I want more?
 
-Well, feel free to edit the code. You can easily add features to TextShower to meet your needs because its code is clear, clean and commented.  This is why I said TextShower is *flexible*.
+The complete source of TextShower is annotated, so you can edit it to match your needs.
 
 Browsers support
 ====
@@ -97,24 +99,6 @@ It is a real issue and should be [reported](https://github.com/filsmick/TextShow
 License
 ====
 
-(MIT license slightly modified)
-
 Copyright © 2013 Yohaï Berreby
 
-Permission is hereby granted, free of charge, to any person obtaining a copy  
-of this software and associated documentation files (the "Software"), to deal  
-in the Software without limitation the rights to use, copy, modify, merge, publish  
-and distribute, and to permit persons to whom the Software is furnished to do so,  
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all  
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
-SOFTWARE. YOU CANNOT SUBLICENSE AND/OR SELL COPIES OF THIS SOFTWARE WITHOUT  
-THE EXPRESS PERMISSION TO DO SO.
+You can freely upload, share, edit and / or distribute TextShower as long as you leave the copyright notice at the top of the .js files. You are not allowed to sell copies of TextShower.
