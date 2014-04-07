@@ -89,7 +89,8 @@ See http://github.com/filsmick/TextShower/ for license and instructions
           this.prevHeight = this.textElement.css('height');
           this.prevMargin = this.textElement.css('margin');
           this.prevPaddingTop = this.textElement.css('paddingTop');
-          this.prevPaddingBottom = this.textElement.css('paddingBottom').css('height', '0px').css('margin', '0 0 0 0').css('padding-top', '0').css('padding-bottom', '0');
+          this.prevPaddingBottom = this.textElement.css('paddingBottom');
+          this.textElement.css('height', '0px').css('margin', '0 0 0 0').css('padding-top', '0').css('padding-bottom', '0');
           this.titleElement.css('margin-bottom', this.titleElement.css('margin-bottom').substring(0, -2) / 2);
           setTimeout((function() {
             return _this.textElement.removeClass('notransition');
@@ -121,7 +122,8 @@ See http://github.com/filsmick/TextShower/ for license and instructions
           this.textElement.css('height', 'auto');
           this.prevHeight = this.textElement.height() + 'px';
           this.textElement.css('height', actualHeight);
-          this.textElement.height().removeClass('notransition');
+          this.textElement.height();
+          this.textElement.removeClass('notransition');
           transEnd = function() {
             _this.textElement.addClass('notransition').css('height', 'auto');
             return _this.prevHeight = _this.textElement.height() + 'px';

@@ -110,7 +110,7 @@ do ($ = window.jQuery) ->
 				@prevMargin = @textElement.css('margin')
 				@prevPaddingTop = @textElement.css('paddingTop')
 				@prevPaddingBottom = @textElement.css('paddingBottom')
-					.css('height', '0px')
+				@textElement.css('height', '0px')
 					.css('margin', '0 0 0 0')
 					.css('padding-top', '0')
 					.css('padding-bottom', '0')
@@ -155,7 +155,7 @@ do ($ = window.jQuery) ->
 				# their properties are in the 'transitions' var.
 			
 				@textElement.height() # Refreshes height
-					.removeClass('notransition')
+				@textElement.removeClass('notransition')
 	
 				transEnd = =>
 					@textElement.addClass('notransition').css('height', 'auto')
@@ -260,7 +260,7 @@ do ($ = window.jQuery) ->
 				hash = window.location.hash.substring(1)
 				if hash is @titleElement.attr('id') and hash isnt ''
 					@changeState(false)
-					# Scrolls to the title of the box once the longest transition
+					# Scrolls to the title of the box once the longest transition ended
 					setTimeout(@titleElement[0].scrollIntoView(true), @longestTransition)
 
 		# Creates a TSBox instance for all HTML boxes
