@@ -1,6 +1,6 @@
 Presentation
 ====
-[![release 1.0.2](http://b.repl.ca/v1/release-1.0.2-green.png)](https://github.com/filsmick/TextShower/releases/latest)
+[![release 1.0.3](http://b.repl.ca/v1/release-1.0.3-green.png)](https://github.com/filsmick/TextShower/releases/latest)
 
 Ever wanted a simple and customisable jQuery plugin that allows you to fold / unfold text on click, with animations and custom behavior? I think you found the right place.
 
@@ -13,13 +13,13 @@ It is **not** a slideshow with arrows and images but a *text slider*.
 Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
 Downloads:  
-- [Developement (12 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.2/TextShower.js)  
-- [Minified (8 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.2/TextShower.min.js)
+- [Developement (9 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.js)  
+- [Minified (6 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.min.js)
 
 How to use
 ====
 
-There is two ways to use TextShower. One is for those who don't care about animation settings and just want to get the work done, and one is for those who want a fully-customized behavior. Let's start with the simplest.
+There are two ways to use TextShower. One is for those who don't care about animation settings and just want to get the work done, and one is for those who want a fully-customized behavior. Let's start with the simplest.
 
 ## The simple solution
 
@@ -39,6 +39,15 @@ And embed TextShower just before closing the `body` tag (*after* jQuery):
 ```
 
 …and you're done.
+
+You can also add the "TextShower-open" class to your box element to have it open on page load:
+
+``` html
+<div class="TextShower-box TextShower-open"> 
+	<strong class="TextShower-title">Headlines of the text</strong> 
+	<p class="TextShower-text">This text will be shown as soon as the page is loaded but can be hidden by clicking the title of the box</p>
+</div>
+```
 
 
 ## The less simple one
@@ -79,12 +88,12 @@ And now, your pages have different transitions and everyone is happy.
 
 ## And if I want more?
 
-The complete source of TextShower is annotated, so you can edit it to match your needs.
+The complete source of TextShower is annotated, so you can edit it to match your needs. Remember, it is written in CoffeeScript, so it is better to edit the *CoffeeScript* source rather than the JavaScript one.
 
 Browsers support
 ====
 
-TextShower should support everything that jQuery support. Everything should work fine with jQuery 1.8+, even in old IE. If you have jQuery 2.x embedded instead, you will miss all these poor Internet Explorer 8 and lower users.
+TextShower should support everything that jQuery supports. Everything should work fine with jQuery 1.8+, even in old IE. If you have jQuery 2.x embedded instead, you will miss all these poor Internet Explorer 8 and lower users.
 
 So if you have any bug in one of these browsers:
 
@@ -99,6 +108,6 @@ It is a real issue and should be [reported](https://github.com/filsmick/TextShow
 License
 ====
 
-Copyright © 2013 Yohaï Berreby
+Copyright © 2013 Yohaï Berreby (@filsmick)
 
 You can freely upload, share, edit and / or distribute TextShower as long as you leave the copyright notice at the top of the .js files. You are not allowed to sell copies of TextShower.

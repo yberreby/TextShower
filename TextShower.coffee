@@ -1,6 +1,6 @@
 ###
-TextShower v1.0.3 Beta - jQuery version
-© 2013 Yohaï Berreby <yohaiberreby@gmail.com>
+TextShower v1.0.3
+© 2013 Yohaï Berreby (@filsmick) <yohaiberreby@gmail.com>
 See http://github.com/filsmick/TextShower/ for license and instructions
 ###
 
@@ -117,7 +117,7 @@ do ($ = window.jQuery) ->
 				@titleElement.css('margin-bottom', @titleElement.css('margin-bottom').substring(0, -2) / 2)
 				# You can add .css() here to define the "JavaScript" style of your boxes.
 				# Example: @titleElement.css('color', 'blue')
-				# All your titles would become blue!
+				# All your titles would become blue, no need of a special stylesheet.
 		
 				setTimeout (=>
 					@textElement.removeClass('notransition')
@@ -196,7 +196,7 @@ do ($ = window.jQuery) ->
 					# Add code to be run with CSS transitions when the box is opened here
 					# (will work only if you have added your properties to the 'transition' variable)
 	
-					# Use a timer instead of 
+					# When the longest transition ended, fix the height of the box
 					@timer = setTimeout(transEnd, Math.max.apply(Math, @durationArray) * 1000)
 			
 			closeBox: ->
@@ -209,7 +209,7 @@ do ($ = window.jQuery) ->
 				@prevHeight = @textElement.height()
 				@textElement.css('height', @textElement.height() + "px")
 			
-				# Here code will be run without transitions when the box is closed
+				# Here the code will be run without transitions when the box is closed
 	
 				setTimeout (=>
 					@textElement.removeClass('notransition')
