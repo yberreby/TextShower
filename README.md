@@ -13,8 +13,21 @@ It is **not** a slideshow with arrows and images but a *text slider*.
 Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
 Downloads:  
-- [Developement (9 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.js)  
-- [Minified (6 Ko)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.min.js)
+- [Developement (9 KB)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.js)  
+- [Minified (6 KB)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.min.js)
+
+
+Why TextShower?
+====
+
+You may wonder, "why would I use TextShower? There are surely lots of jQuery plugins doing the same thing." And you are probably right. But wait a minute, how do they work? Most of them use the **.toggle()** jQuery method and a custom CSS file. That's all very well but, what if the user has an old browser or disabled JavaScript with a plugin like **NoScript?** Well, you'll end with that: ![Frozen toggler](http://puu.sh/8o91m.png)
+
+What is the problem? Everything seems in place, but if you try to click the box, nothing happens. *That's* the problem. **If an user doesn't have JavaScript or if his browser doesn't work with your version of jQuery, he can't read the text inside the text slider**. Don't trust me, disable JavaScript, go to the [demo page of Symple Shortcodes](http://wpexplorer-demos.com/symple-shortcodes/) and try to use the toggles or the accordion.
+
+With **TextShower**, this problem doesn't exist. Even if the user cannot execute the script, he will be able to read the content inside the toggle box as if you didn't use a plugin. I even added a CSS transition fallback to the code to support more browsers. And if you were worried about the **load time** of the script, know that TextShower is only **6KB minified**.
+
+TextShower is also super simple to customize: you can replace the dynamic "+" with a dynamic down or up triangle, you can change the easing of the slide animation, you can set page-specific settings, you can modify the CSS of the boxes directly inside the .js, without having to worry about compatibility with your other styles, and more. Read the rest of this page to discover what TextShower can do.
+
 
 How to use
 ====
