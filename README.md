@@ -121,6 +121,6 @@ It is a real issue and should be [reported](https://github.com/filsmick/TextShow
 License
 ====
 
-Copyright © 2013 Yohaï Berreby (@filsmick)
+Copyright © 2013-2014 Yohaï Berreby (@filsmick)
 
 You can freely upload, share, edit and / or distribute TextShower as long as you leave the copyright notice at the top of the .js files. You are not allowed to sell copies of TextShower.
