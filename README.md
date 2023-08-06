@@ -1,20 +1,26 @@
+Disclaimer
+====
+
+This is a (very) old project I wrote in middle school (2013). Not maintained.
+
+I was very excited to release an open-source package at the time :).
+
+
 Presentation
 ====
-[![release 1.0.3](http://b.repl.ca/v1/release-1.0.3-green.png)](https://github.com/filsmick/TextShower/releases/latest)
+[![release 1.0.3](http://b.repl.ca/v1/release-1.0.3-green.png)](https://github.com/yberreby/TextShower/releases/latest)
 
-Ever wanted a simple and customisable jQuery plugin that allows you to fold / unfold text on click, with animations and custom behavior? I think you found the right place.
+Simple and customisable jQuery plugin that allows you to fold / unfold text on click, with animations and custom behavior.
 
 **TextShower** is probably the simplest flexible solution to create text sliders. It is written in CoffeeScript. You can either create sliders with a plug'n'play solution or customize settings page-to-page, and developers can add custom code at marked points in the code.
 
 It is **not** a slideshow with arrows and images but a *text slider*.
 
-[Example](http://filsmick.github.io/pages/TextShower/)
-
 Requirements: jQuery 1.8+ (Recommended: 1.10.2)
 
 Downloads:  
-- [Developement (9 KB)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.js)  
-- [Minified (6 KB)](https://github.com/filsmick/TextShower/releases/download/v1.0.3/TextShower.min.js)
+- [Developement (9 KB)](https://github.com/yberreby/TextShower/releases/download/v1.0.3/TextShower.js)  
+- [Minified (6 KB)](https://github.com/yberreby/TextShower/releases/download/v1.0.3/TextShower.min.js)
 
 
 Why TextShower?
@@ -22,9 +28,9 @@ Why TextShower?
 
 You may wonder, "why would I use TextShower? There are surely lots of jQuery plugins doing the same thing." And you are probably right. But wait a minute, how do they work? Most of them use the **.toggle()** jQuery method and a custom CSS file. That's all very well but, what if the user has an old browser or disabled JavaScript with a plugin like **NoScript?** Well, you'll end with that: ![Frozen toggler](http://puu.sh/8o91m.png)
 
-What is the problem? Everything seems in place, but if you try to click the box, nothing happens. *That's* the problem. **If an user doesn't have JavaScript or if his browser doesn't work with your version of jQuery, he can't read the text inside the text slider**. Don't trust me, disable JavaScript, go to the [demo page of Symple Shortcodes](http://wpexplorer-demos.com/symple-shortcodes/) and try to use the toggles or the accordion.
+What is the problem? Everything seems in place, but if you try to click the box, nothing happens. **If an user doesn't have JavaScript or if his browser doesn't work with your version of jQuery, he can't read the text inside the text slider**. Don't trust me, disable JavaScript, go to the [demo page of Symple Shortcodes](http://wpexplorer-demos.com/symple-shortcodes/) and try to use the toggles or the accordion.
 
-With **TextShower**, this problem doesn't exist. Even if the user cannot execute the script, he will be able to read the content inside the toggle box as if you didn't use a plugin. I even added a CSS transition fallback to the code to support more browsers. And if you were worried about the **load time** of the script, know that TextShower is only **6KB minified**.
+With **TextShower**, this problem doesn't exist. Even if the user cannot execute the script, they will be able to read the content inside the toggle box as if you didn't use a plugin. I added a CSS transition fallback to the code to support more browsers. And if you were worried about the **load time** of the script, know that TextShower is only **6KB minified**.
 
 TextShower is also super simple to customize: you can replace the dynamic "+" with a dynamic down or up triangle, you can change the easing of the slide animation, you can set page-specific settings, you can modify the CSS of the boxes directly inside the .js, without having to worry about compatibility with your other styles, and more. Read the rest of this page to discover what TextShower can do.
 
@@ -48,7 +54,7 @@ Then add the following code to your page:
 And embed TextShower just before closing the `body` tag (*after* jQuery):
 
 ``` html
-<script src="http://filsmick.github.io/javascripts/TextShower.min.js"></script>
+<script src="http://yberreby.github.io/javascripts/TextShower.min.js"></script>
 ```
 
 …and you're done.
@@ -101,7 +107,7 @@ And now, your pages have different transitions and everyone is happy.
 
 ## And if I want more?
 
-The complete source of TextShower is annotated, so you can edit it to match your needs. Remember, it is written in CoffeeScript, so it is better to edit the *CoffeeScript* source rather than the JavaScript one.
+The complete source of TextShower is annotated, so you can edit it to match your needs. 
 
 Browsers support
 ====
@@ -116,4 +122,4 @@ So if you have any bug in one of these browsers:
 * Opera 10.6+
 * Chrome 8+ 
 
-It is a real issue and should be [reported](https://github.com/filsmick/TextShower/issues/new) along with the error you encountered.
+It is a real issue and should be [reported](https://github.com/yberreby/TextShower/issues/new) along with the error you encountered.
